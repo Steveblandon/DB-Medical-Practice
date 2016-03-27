@@ -86,6 +86,58 @@ serviceType VARCHAR(50) NOT NULL,
 PRIMARY KEY (dateTime, patientID),
 FOREIGN KEY (dateTime, patientID) REFERENCES Appointment (dateTime, patientID),
 FOREIGN KEY (serviceType) REFERENCES Service (type));
+
+CREATE TABLE HealthScreening  (
+dateTime DATETIME NOT NULL, 
+patientID INT UNSIGNED NOT NULL,
+smoker CHAR(1), 
+pregnent CHAR(1),
+height INT UNSIGNED, 
+weight INT UNSIGNED, 
+bloodPressure VARCHAR(10), 
+HR VARCHAR(10),
+currentMedications VARCHAR(50), 
+PRIMARY KEY (dateTime, patientID),
+FOREIGN KEY (dateTime, patientID) REFERENCES Appointment (dateTime, patientID));
+
+CREATE TABLE Prescription(
+date DATE NOT NULL, 
+patientID INT UNSIGNED NOT NULL, 
+type VARCHAR(100) NOT NULL,
+employeeID INT UNSIGNED NOT NULL,
+instruction VARCHAR(100), 
+PRIMARY KEY (date, patientID, type),
+FOREIGN KEY(patientID) REFERENCES Patient(patientID));
+
+CREATE TABLE MedicalTest (
+date DATE NOT NULL, 
+type VARCHAR(50) NOT NULL, 
+patientID INT UNSIGNED NOT NULL, 
+testLocation VARCHAR(50), 
+aDate DATE, 
+result VARCHAR(100), 
+PRIMARY KEY(date, type, patientID),
+FOREIGN KEY(patientID) REFERENCES Patient(patientID));
+
+CREATE TABLE Bill(
+billNo INT UNSiGNED NOT NULL, 
+status_bill VARCHAR(50),
+dateTime DATETIME NOT NULL, 
+patientID INT UNSIGNED NOT NULL,
+amountCharged INT UNSIGNED, 
+amountPaid INT UNSIGNED, 
+outstandingBalance INT UNSIGNED, 
+description VARCHAR(50), 
+PRIMARY KEY(billNo),
+FOREIGN KEY (dateTime, patientID) REFERENCES Appointment (dateTime, patientID));
+
+CREATE TABLE Claim(
+billNo INT UNSIGNED NOT NULL, 
+amount INT UNSIGNED NOT NULL, 
+status_claim VARCHAR(50), 
+response VARCHAR(50), 
+PRIMARY KEY(billNo),
+FOREIGN KEY(billNo) REFERENCES Bill(billNo));
 ";
 
 /* uncomment to delete tables from database for testing purposes
