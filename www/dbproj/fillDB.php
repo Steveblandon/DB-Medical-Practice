@@ -1,11 +1,5 @@
 <html>
 <body>
-<?php
-
-$serverName = 'localhost';
-$username = 'root';
-$password = '';
-$database = 'dbproj';
 
 $conn = new mysqli($serverName, $username, $password, $database);
 
@@ -21,10 +15,16 @@ function generateNumStr($size){
 	}
 	return $num;
 }
-
-$sql = "
+/*
+$sql = " 
 INSERT INTO Service (type, cost)
 VALUES ('General', '100.00');
+<?php
+
+$serverName = 'localhost';
+$username = 'root';
+$password = '';
+$database = 'hospitalDB';
 
 INSERT INTO Service (type, cost)
 VALUES ('physical', '200.00');
@@ -105,19 +105,34 @@ VALUES (CURTIME(),1,1,'Y');
 INSERT INTO Appointment (datetime, patientID, employeeID, checkedIn)
 VALUES (DATE_ADD(CURTIME(),INTERVAL 3 HOUR),2,1,'Y');
 ";
+*/ 
+$sql = "
+INSERT INTO Visitation(dateTime, patientID, reasonForVisit, serviceType) 
+VALUES (CURDATE(), 1, 'Cough', 'Flu', 'General'); 
 
+"; 
+
+
+if($conn -> query($sql) == TRUE ){
+	echo "<br/>";
+	echo "Insertion Successfull";
+}
+else {
+	echo "<br/>";
+	echo "Error: " . $conn -> error; 
+}
 
 /* uncomment to delete tables from database for testing purposes
 $sql = "REMOVE * FROM Service;
 
 ";
-*/
+
 
 if ($conn->multi_query($sql)){
 	echo "successfully filled database with data <br>";
 } 
 else echo "Error: " . $conn->error . "<br>";
-
+*/
 
 ?>
 </body>

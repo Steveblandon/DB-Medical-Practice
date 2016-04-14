@@ -6,11 +6,11 @@
 	$serverName = "localhost"; 
 	$username = "root";
 	$password = "";
-	$dbname = "universitydb";
+	$dbname = "hospitalDB";
 
 	$conn = new mysqli($serverName, $username, $password, $dbname);
 
-	if($conn->connect_error) {
+	if($conn -> connect_error) {
 		die ("Connection Failed: " . $conn -> connect_error);
 	}
 	else{
@@ -33,6 +33,7 @@
 ?>
 Name: <input type="text" name="name" value="<?php echo $course;?>">
 <?php
+/*
 	//search box 
 	echo 'What do you want to look up? <br>';
 	echo '<form method="post"> 
@@ -54,7 +55,7 @@ Name: <input type="text" name="name" value="<?php echo $course;?>">
 	}
 
 
-
+*/ 
 	$conn->close(); 
 ?>
 </body>

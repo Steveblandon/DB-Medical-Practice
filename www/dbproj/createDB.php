@@ -1,19 +1,15 @@
 <html>
 <body>
 <?php
-
 $serverName = "localhost";
 $username = "root";
 $password = "";
 $database = "dbproj";
-
 $conn = new mysqli($serverName, $username, $password, $database);
-
 if ($conn->connect_error){
 	die("Connection failed" . $conn->connect_error);
 }
 else echo "Connected to database successfully <br>";
-
 $sql = "
 CREATE TABLE Service(
 type VARCHAR(50) PRIMARY KEY,
@@ -87,14 +83,15 @@ PRIMARY KEY (dateTime, patientID),
 FOREIGN KEY (dateTime, patientID) REFERENCES Appointment (dateTime, patientID),
 FOREIGN KEY (serviceType) REFERENCES Service (type));
 
+///////////////////////////////SEAN 
 CREATE TABLE HealthScreening  (
 dateTime DATETIME NOT NULL, 
 patientID INT UNSIGNED NOT NULL,
 smoker CHAR(1), 
-pregnant CHAR(1),
-height VARCHAR(6), 
-weight INT(3) UNSIGNED, 
-bloodPressure VARCHAR(7), 
+pregnent CHAR(1),
+height INT UNSIGNED, 
+weight INT UNSIGNED, 
+bloodPressure VARCHAR(10), 
 HR VARCHAR(10),
 currentMedications VARCHAR(50), 
 PRIMARY KEY (dateTime, patientID),
@@ -103,7 +100,7 @@ FOREIGN KEY (dateTime, patientID) REFERENCES Appointment (dateTime, patientID));
 CREATE TABLE Prescription(
 date DATE NOT NULL, 
 patientID INT UNSIGNED NOT NULL, 
-type VARCHAR(50) NOT NULL,
+type VARCHAR(100) NOT NULL,
 employeeID INT UNSIGNED NOT NULL,
 instruction VARCHAR(100), 
 PRIMARY KEY (date, patientID, type),
@@ -120,38 +117,34 @@ PRIMARY KEY(date, type, patientID),
 FOREIGN KEY(patientID) REFERENCES Patient(patientID));
 
 CREATE TABLE Bill(
-billNo INT UNSiGNED AUTO_INCREMENT NOT NULL, 
-status_bill VARCHAR(20),
+billNo INT UNSiGNED NOT NULL, 
+status_bill VARCHAR(50),
 dateTime DATETIME NOT NULL, 
 patientID INT UNSIGNED NOT NULL,
-amountCharged FLOAT(9,2), 
-amountPaid FLOAT(9,2), 
-outstandingBalance FLOAT(9,2), 
-serviceType VARCHAR(50)
+amountCharged INT UNSIGNED, 
+amountPaid INT UNSIGNED, 
+outstandingBalance INT UNSIGNED, 
+description VARCHAR(50), 
 PRIMARY KEY(billNo),
-FOREIGN KEY (dateTime, patientID) REFERENCES Appointment (dateTime, patientID)
-FOREIGN KEY (serviceType) REFERENCES Service (type));
+FOREIGN KEY (dateTime, patientID) REFERENCES Appointment (dateTime, patientID));
 
 CREATE TABLE Claim(
 billNo INT UNSIGNED NOT NULL, 
-amount FLOAT(9,2), 
+amount INT UNSIGNED NOT NULL, 
 status_claim VARCHAR(50), 
 response VARCHAR(50), 
 PRIMARY KEY(billNo),
 FOREIGN KEY(billNo) REFERENCES Bill(billNo));
-";
 
+";
 /* uncomment to delete tables from database for testing purposes
 $sql = "DROP TABLES Visitation, Appointment, Immunization,
 Schedule, SalaryPaid, Patient, Employee, Service";
 */
-
 if ($conn->multi_query($sql)){
 	echo "successfully created tables <br>";
 } 
 else echo "Error: " . $conn->error . "<br>";
-
-
 ?>
 </body>
 </html>
