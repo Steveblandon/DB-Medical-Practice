@@ -1,25 +1,11 @@
-<html>
-<body>
-<?php
-
-$serverName = "localhost";
-$username = "root";
-$password = "";
-$database = "dbproj";
-
-$conn = new mysqli($serverName, $username, $password, $database);
-
-if ($conn->connect_error){
-	die("Connection failed" . $conn->connect_error);
-}
-else echo "Connected to database successfully <br>";
-
-$sql = "
-CREATE TABLE Service(
+DROP TABLE IF EXISTS Service;
+CREATE TABLE IF NOT EXISTS Service(
 type VARCHAR(50) PRIMARY KEY,
 cost FLOAT(8,2) NOT NULL);
 
-CREATE TABLE Employee(
+
+DROP TABLE IF EXISTS Employee;
+CREATE TABLE IF NOT EXISTS Employee(
 employeeID INT UNSIGNED AUTO_INCREMENT PRIMARY KEY NOT NULL,
 fName VARCHAR(30) NOT NULL,
 lName VARCHAR(30) NOT NULL,
@@ -35,7 +21,9 @@ bankRoutingNo CHAR(9) NOT NULL,
 username VARCHAR(20) NOT NULL,
 password CHAR(32) NOT NULL);
 
-CREATE TABLE Patient(
+
+DROP TABLE IF EXISTS Patient;
+CREATE TABLE IF NOT EXISTS Patient(
 patientID INT UNSIGNED AUTO_INCREMENT PRIMARY KEY NOT NULL,
 fName VARCHAR(30) NOT NULL,
 lName VARCHAR(30) NOT NULL,
@@ -47,28 +35,36 @@ insuranceProvider VARCHAR(30),
 insuranceNo VARCHAR(10),
 insurancePrimary VARCHAR(60));
 
-CREATE TABLE SalaryPaid(
+
+DROP TABLE IF EXISTS SalaryPaid;
+CREATE TABLE IF NOT EXISTS SalaryPaid(
 date DATE NOT NULL,
 employeeID INT UNSIGNED NOT NULL,
 amount FLOAT(9,2) NOT NULL,
 PRIMARY KEY (date, employeeID),
 FOREIGN KEY (employeeID) REFERENCES Employee (employeeID));
 
-CREATE TABLE Schedule(
+
+DROP TABLE IF EXISTS Schedule;
+CREATE TABLE IF NOT EXISTS Schedule(
 employeeID INT UNSIGNED PRIMARY KEY NOT NULL,
 workDays VARCHAR(7) NOT NULL,
 startTime TIME NOT NULL,
 endTime TIME NOT NULL,
 FOREIGN KEY (employeeID) REFERENCES Employee (employeeID));
 
-CREATE TABLE Immunization(
+
+DROP TABLE IF EXISTS Immunization;
+CREATE TABLE IF NOT EXISTS Immunization(
 patientID INT UNSIGNED NOT NULL,
 date DATE NOT NULL,
 type VARCHAR(30) NOT NULL,
 PRIMARY KEY (patientID, date, type),
 FOREIGN KEY (patientID) REFERENCES Patient (patientID));
 
-CREATE TABLE Appointment(
+
+DROP TABLE IF EXISTS Appointment;
+CREATE TABLE IF NOT EXISTS Appointment(
 dateTime DATETIME NOT NULL,
 patientID INT UNSIGNED NOT NULL,
 employeeID INT UNSIGNED NOT NULL,
@@ -77,7 +73,9 @@ PRIMARY KEY (dateTime, patientID),
 FOREIGN KEY (patientID) REFERENCES Patient (patientID),
 FOREIGN KEY (employeeID) REFERENCES Employee (employeeID));
 
-CREATE TABLE Visitation(
+
+DROP TABLE IF EXISTS Visitation;
+CREATE TABLE IF NOT EXISTS Visitation(
 dateTime DATETIME NOT NULL,
 patientID INT UNSIGNED NOT NULL,
 reasonForVisit TEXT NOT NULL,
@@ -87,7 +85,9 @@ PRIMARY KEY (dateTime, patientID),
 FOREIGN KEY (dateTime, patientID) REFERENCES Appointment (dateTime, patientID),
 FOREIGN KEY (serviceType) REFERENCES Service (type));
 
-CREATE TABLE HealthScreening  (
+
+DROP TABLE IF EXISTS HealthScreening;
+CREATE TABLE IF NOT EXISTS HealthScreening(
 dateTime DATETIME NOT NULL, 
 patientID INT UNSIGNED NOT NULL,
 smoker CHAR(1), 
@@ -100,7 +100,9 @@ currentMedications VARCHAR(50),
 PRIMARY KEY (dateTime, patientID),
 FOREIGN KEY (dateTime, patientID) REFERENCES Appointment (dateTime, patientID));
 
-CREATE TABLE Prescription(
+
+DROP TABLE IF EXISTS Prescription;
+CREATE TABLE IF NOT EXISTS Prescription(
 date DATE NOT NULL, 
 patientID INT UNSIGNED NOT NULL, 
 type VARCHAR(50) NOT NULL,
@@ -109,7 +111,9 @@ instruction VARCHAR(100),
 PRIMARY KEY (date, patientID, type),
 FOREIGN KEY(patientID) REFERENCES Patient(patientID));
 
-CREATE TABLE MedicalTest (
+
+DROP TABLE IF EXISTS MedicalTest;
+CREATE TABLE IF NOT EXISTS MedicalTest(
 date DATE NOT NULL, 
 type VARCHAR(50) NOT NULL, 
 patientID INT UNSIGNED NOT NULL, 
@@ -119,7 +123,9 @@ result VARCHAR(100),
 PRIMARY KEY(date, type, patientID),
 FOREIGN KEY(patientID) REFERENCES Patient(patientID));
 
-CREATE TABLE Bill(
+
+DROP TABLE IF EXISTS Bill;
+CREATE TABLE IF NOT EXISTS Bill(
 billNo INT UNSiGNED AUTO_INCREMENT NOT NULL, 
 status_bill VARCHAR(20),
 dateTime DATETIME NOT NULL, 
@@ -132,26 +138,12 @@ PRIMARY KEY(billNo),
 FOREIGN KEY (dateTime, patientID) REFERENCES Appointment (dateTime, patientID)
 FOREIGN KEY (serviceType) REFERENCES Service (type));
 
-CREATE TABLE Claim(
+
+DROP TABLE IF EXISTS Claim;
+CREATE TABLE IF NOT EXISTS Claim(
 billNo INT UNSIGNED NOT NULL, 
 amount FLOAT(9,2), 
 status_claim VARCHAR(50), 
 response VARCHAR(50), 
 PRIMARY KEY(billNo),
 FOREIGN KEY(billNo) REFERENCES Bill(billNo));
-";
-
-/* uncomment to delete tables from database for testing purposes
-$sql = "DROP TABLES Visitation, Appointment, Immunization,
-Schedule, SalaryPaid, Patient, Employee, Service";
-*/
-
-if ($conn->multi_query($sql)){
-	echo "successfully created tables <br>";
-} 
-else echo "Error: " . $conn->error . "<br>";
-
-
-?>
-</body>
-</html>
