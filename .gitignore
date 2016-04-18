@@ -16,6 +16,7 @@ logs/
 lang/
 bin/php/
 cgi_bin/
+bin/
 bin/mysql/mysql5.7.9/share/
 bin/mysql/mysql5.7.9/bin/
 bin/mysql/mysql5.7.9/data/universitydb
