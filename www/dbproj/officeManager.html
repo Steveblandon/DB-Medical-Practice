@@ -4,14 +4,7 @@
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-	<script>
-		//ignore this function for now, just experimenting
-		function editTable(element)
-		{
-			htm = element.innerHTML;
-			element.innerHTML = "<input type='text' value='" + htm + "'>";
-		}
-	</script>
+	<script src="dataRetrieval.js"></script>
 </head>
 <body> 
 <!--Office Mangager:
@@ -90,77 +83,171 @@
 		</div>
 		<div class="col-md-2"></div>
 	</div>
+	<div class ="row" style="margin-top:20px"></div>
 	<div class="row">
-		<div class="col-md-2"></div>
-		<div class="col-md-8">
-			<div class="tab-content">
-				<div id="Home" class="tab-pane fade in active">
-					<h1 class="text-center"> Welcome! </h1>
-					<p class="text-center"> office manager suite </p>
-				</div>
-				<div id="Payments" class="tab-pane fade">
-					<p> Payments </p>
-				</div>
-				<div id="Claims" class="tab-pane fade">
-					<p> Claims </p>
-				</div>
-				<div id="Salaries" class="tab-pane fade">
-					<p> Salaries </p>
-				</div>
-				<div id="ViewService" class="tab-pane fade">
-					<p> view services </p>
-				</div>
-				<div id="AddService" class="tab-pane fade">
-					<p> Add New Service </p>
-				</div>
-				<div id="ViewEmployee" class="tab-pane fade">
-					<table class="table table-hover">
-					<thead>
-					  <tr>
-						<th>#</th>
-						<th>Firstname</th>
-					  </tr>
-					</thead>
-					<tbody>
-					  <tr>
-						<td>1</td>
-						<td> Anne </td>
-					  </tr>
-					  <tr>
-						<td>2</td>
-						<td>Debbie</td>
-					  </tr>
-					  <tr>
-						<td>3</td>
-						<td>John</td>
-					  </tr>
-					</tbody>
-					</table>
-				</div>
-				<div id="AddEmployee" class="tab-pane fade">
-					<p> add employee </p>
-					<form>
-					<input type="button" value="press" onClick="this.type='text'">
-					</form>
-				</div>
-				<div id="ViewPatient" class="tab-pane fade">
-					<p> view patient </p>
-				</div>
-				<div id="AddPatient" class="tab-pane fade">
-					<p> Add Patient </p>
-				</div>
-				<div id="DelPatient" class="tab-pane fade">
-					<p> Delete Patient </p>
-				</div>
-				<div id="ViewAppt" class="tab-pane fade">
-					<p> view appointments </p>
-				</div>
-				<div id="AddAppt" class="tab-pane fade">
-					<p> Add New appointment </p>
-				</div>
-			</div>
+		<div class="tab-content">
+		<div id="Home" class="tab-pane fade in active">
+			<h1 class="text-center"> Welcome! </h1>
+			<p class="text-center"> office manager suite </p>
 		</div>
-		<div class="col-md-2"></div>
+		<div id="Payments" class="tab-pane fade">
+			<p class="text-center"> Payments </p>
+		</div>
+		<div id="Claims" class="tab-pane fade">
+			<p class="text-center"> Claims </p>
+		</div>
+		<div id="Salaries" class="tab-pane fade">
+			<p class="text-center"> Salaries </p>
+		</div>
+		<div id="ViewService" class="tab-pane fade">
+			<p class="text-center"> view services </p>
+		</div>
+		<div id="AddService" class="tab-pane fade">
+			<p class="text-center"> Add New Service </p>
+		</div>
+		<div id="ViewEmployee" class="tab-pane fade">
+			<p class="text-center"> View Employee </p>
+		</div>
+		<div id="AddEmployee" class="tab-pane fade">
+			<form role="form" action="addEmployee.php" method="post" autocomplete="off">
+			<div class="row">
+				<div class="col-md-4"></div>
+				<div class="col-md-2">
+					<div class="form-group">
+						<label>First Name:
+						<input type="text" class="form-control" name="fName">
+						</label>
+					</div>
+				</div>
+				<div class="col-md-2">
+					<div class="form-group">
+						<label>Last Name:
+						<input type="text" class="form-control" name="lName">
+						</label>
+					</div>
+				</div>
+				<div class="col-md-4"></div>
+			</div>
+			<div class="row">
+				<div class="col-md-4"></div>
+				<div class="col-md-2">
+					<div class="form-group">
+						<label>Date of Birth:
+						<input type="date" class="form-control" name="date">
+						</label>
+					</div>
+				</div>
+				<div class="col-md-2">
+					<div class="form-group">
+						<label>Gender:<br>
+						<label class="radio-inline">
+						<input type="radio" name="sex" value="M">M
+						</label>
+						<label class="radio-inline">
+						<input type="radio" name="sex" value="F">F
+						</label>
+						</label>
+					</div>
+				</div>
+				<div class="col-md-4"></div>
+			</div>
+			<div class="row">
+				<div class="col-md-4"></div>
+				<div class="col-md-2">
+					<div class="form-group">
+						<label>Address:
+						<input type="text" class="form-control" name="address">
+						</label>
+					</div>
+				</div>
+				<div class="col-md-2">
+					<div class="form-group">
+						<label>Phone Number:
+						<input type="text" class="form-control" name="phoneNo" maxlength="10">
+						</label>
+					</div>
+				</div>
+				<div class="col-md-4"></div>
+			</div>
+			<div class="row">
+				<div class="col-md-4"></div>
+				<div class="col-md-4">
+					<div class="form-group">
+						<label>SSN:
+						<input type="text" class="form-control" name="ssn" maxlength="9" size="100%">
+						</label>
+					</div>
+				</div>
+				<div class="col-md-4"></div>
+			</div>
+			<div class="row">
+				<div class="col-md-4"></div>
+				<div class="col-md-2">
+					<div class="form-group">
+						<label>Bank Account No:
+						<input type="text" class="form-control" name="bankAcctNo" maxlength="17">
+						</label>
+					</div>
+				</div>
+				<div class="col-md-2">
+					<div class="form-group">
+						<label>Bank Routing No:
+						<input type="text" class="form-control" name="bankRoutingNo" maxlength="9">
+						</label>
+					</div>
+				</div>
+				<div class="col-md-4"></div>
+			</div>
+			<div class="row">
+				<div class="col-md-4"></div>
+				<div class="col-md-2">
+					<div class="form-group">
+						<label>Position:
+						<select class="form-control" name="position">
+							<option value="Office Manager">Office Manager</option>
+							<option value="Assistant">Assistant</option>
+							<option value="Doctor">Doctor</option>
+							<option value="Nurse">Nurse</option>
+						</select>
+						</label>
+					</div>
+				</div>
+				<div class="col-md-2">
+					<div class="form-group">
+						<label>Salary:
+						<input type="text" class="form-control" name="salary">
+						</label>
+					</div>
+				</div>
+				<div class="col-md-4"></div>
+			</div>
+			<div class="row">
+				<div class="col-md-4"></div>
+				<div class="col-md-4">
+					<div class="form-group">
+					<input type="submit" class="form-control" value="submit">
+					</div>
+				</div>
+				<div class="col-md-4"></div>
+			</div>
+			</form>
+		</div>
+		<div id="ViewPatient" class="tab-pane fade">
+			<p class="text-center"> view patient </p>
+		</div>
+		<div id="AddPatient" class="tab-pane fade">
+			<p class="text-center"> Add Patient </p>
+		</div>
+		<div id="DelPatient" class="tab-pane fade">
+			<p class="text-center"> Delete Patient </p>
+		</div>
+		<div id="ViewAppt" class="tab-pane fade">
+			<p class="text-center"> view appointments </p>
+		</div>
+		<div id="AddAppt" class="tab-pane fade">
+			<p class="text-center"> Add New appointment </p>
+		</div>
+		</div>
 	</div>
 	
 </div>
