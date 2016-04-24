@@ -1,23 +1,119 @@
+<!DOCTYPE html>
 <html> 
+<head>
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	<script>
+		//ignore this function for now, just experimenting
+		function editTable(element)
+		{
+			htm = element.innerHTML;
+			element.innerHTML = "<input type='text' value='" + htm + "'>";
+		}
+	</script>
+</head>
 <body> 
+<!--Nurse:
+Patient: 
+	search 
+	add 
+	delete 
+	update 
+-->
 
-Nurse Stuff
-<br> 
--view and update patient info  
-<br> 
-<form action = 'nurse2.php' method = 'post'>
-Patient to seach for: <input type = "text" name = "name"> <br>
-<input type = 'submit' value = 'Search for Patient' name = 'Submit1'>
-<br> 
-<br> 
--Update Patient Info: 
-<br>
-<form action = 'nurse2.php' method = 'post'>
-Who are you changing? <input type = "text" name= 'changingName'><br> 
-What are you changing? <input type = "text" name= 'category'><br>
-Change to what? 	  <input type = "text" name= 'change'> <br> 
-<input type = 'submit' value = 'Update Patient Info' name = 'Submit2'>
+<navbar>
+<div class="container">
+	<div class="row">
+		<div class="col-md-9"></div>
+		<div class="col-md-3">
+			<button class="btn btn-default" style="margin-top:5px;">log out</button>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-2"></div>
+		<div class="col-md-8">
+		<ul class="nav nav-tabs">
+			<li class="active"><a data-toggle="tab" href="#Home">Home</a></li>
+			<li class="dropdown">
+			<a class="dropdown-toggle" data-toggle="dropdown" href="#">Patients
+			<span class="caret"></span></a>
+				<ul class="dropdown-menu">
+				<li><a data-toggle="tab" href="#ViewPatient">Search</a></li>
+				<li><a data-toggle="tab" href="#AddPatient">Add New Patient</a></li>
+				<li><a data-toggle="tab" href="#DelPatient">Delete Patient</a></li>
+				<li><a data-toggle="tab" href="#UpdatePatient">Update Patient</a></li>
+				</ul>
+			</li>
+		</div>
+		<div class="col-md-2"></div>
+	</div>
+	<div class="row">
+		<div class="col-md-2"></div>
+		<div class="col-md-8">
+			<div class="tab-content">
+				<div id="Home" class="tab-pane fade in active">
+					<h1 class="text-center"> Welcome! </h1>
+					<p class="text-center"> Nurse suite </p>
+				</div>
+				<div id="ViewPatient" class="tab-pane fade">
+					<p> View patient 
+					<form action = 'nurse.php' method = 'post'>
+					Patient to seach for: <input type = "text" name = "name"> <br>
+					<input type = 'submit' value = 'Search for Patient' name = 'Submit1'>
+					</p>
+				</div>
+				<div id="AddPatient" class="tab-pane fade">
+					<p> Add Patient <br>
+					<form action = 'nurse.php' method = 'post'>
+					ID: <input type = "text" name = "ID"> <br>
+					First Name: <input type = "text" name = "fName1"> <br>
+					Last Name: <input type = "text" name = "lName1"> <br>
+					Sex: <input type = "text" name = "sex"> <br>
+					DOB: <input type = "text" name = "DOB"> <br>
+					Address: <input type = "text" name = "address"> <br>
+					Phone Number: <input type = "text" name = "phoneNo"> <br>
+					Insurance Provider: <input type = "text" name = "insurancePro"> <br>
+					Insurance Number: <input type = "text" name = "insuranceNo"> <br>
+					Insurance Primary: <input type = "text" name = "insurancePrim"> <br>	
+					<input type = 'submit' value = 'Add Patient' name = 'Submit2'>
+					</p>
+				</div>
+				<div id="DelPatient" class="tab-pane fade">
+					<p> Delete Patient
+					<form action = 'nurse.php' method = 'post'>
+					First Name: <input type = "text" name = "fName2"> <br>
+					Last Name: <input type = "text" name = "lName2"> <br> 
+					<input type = 'submit' value = 'Delete Patient' name = 'Submit3'>
+					</p>
+				</div>
+				<div id="UpdatePatient" class="tab-pane fade">
+					<p> Update Patient 
+					Name to update: <br>
+					First: <input type = "text" name = "fName3"> <br>
+					Last Name: <input type = "text" name = "lName3"> <br> 
+					What to update? <br>
+					<input type="radio" name="info" value="fName"> First Name<br>
+  					<input type="radio" name="info" value="lName"> Last Name<br>
+ 					<input type="radio" name="info" value="sex"> Sex <br>
+ 					<input type="radio" name="info" value="DOB"> DOB <br>
+ 					<input type="radio" name="info" value="address" checked> Address <br>
+ 					<input type="radio" name="info" value="phoneNo"> Phone Number <br>
+ 					<input type="radio" name="info" value="insuranceProvider"> Insurance Provider <br>
+ 					<input type="radio" name="info" value="insuranceNo"> Insurance Number <br>
+ 					<input type="radio" name="info" value="InsurancePrimary"> Insurance Primary <br>
 
+					New Information: <input type = "text" name = "change"> <br> 
+					<input type = 'submit' value = 'Update Patient' name = 'Submit4'>
+					</p>
+				</div>
+			</div>
+		</div>
+		<div class="col-md-2"></div>
+	</div>
+	
+</div>
+<navbar>
 
 </body>
 <html> 
