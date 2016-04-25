@@ -27,19 +27,29 @@ address VARCHAR(50) NOT NULL,
 phoneNo CHAR(10) NOT NULL,
 SSN CHAR(9) NOT NULL,
 bankAcctNo VARCHAR(17) NOT NULL,
-bankRoutingNo CHAR(9) NOT NULL,
-username VARCHAR(20) NOT NULL,
-password CHAR(32));
+bankRoutingNo CHAR(9) NOT NULL);
 
 INSERT INTO Employee (fName, lName, position, salary, sex, 
-DOB, address, phoneNo, SSN, bankAcctNo, bankRoutingNo, username)
+DOB, address, phoneNo, SSN, bankAcctNo, bankRoutingNo)
 VALUES ('John','Krugger','Doctor',100000.00,'M', '19771105','11 Short Ave',
-'1234567890', '123456789', '13413354623', '123457689', CONCAT(lName, 1));
+'1234567890', '123456789', '13413354623', '123457689');
 
 INSERT INTO Employee (fName, lName, position, salary, sex, 
-DOB, address, phoneNo, SSN, bankAcctNo, bankRoutingNo, username)
+DOB, address, phoneNo, SSN, bankAcctNo, bankRoutingNo)
 VALUES ('Katie','Ramos','Assistant',43000.00,'F', '19911223','45 Hubbert St',
-'1234657890', '132456789', '15624322652', '123789456', CONCAT(lName, 2));
+'1234657890', '132456789', '15624322652', '123789456');
+
+DROP TABLE IF EXISTS Account;
+CREATE TABLE IF NOT EXISTS Account(
+username VARCHAR(20) NOT NULL PRIMARY KEY,
+password CHAR(32),
+employeeID INT UNSIGNED,
+FOREIGN KEY (employeeID) REFERENCES Employee (employeeID));
+
+INSERT INTO Account (username, employeeID)
+VALUES ("Krugger1",1);
+INSERT INTO Account (username, employeeID)
+VALUES ("Ramos2",2);
 
 DROP TABLE IF EXISTS Patient;
 CREATE TABLE IF NOT EXISTS Patient(
