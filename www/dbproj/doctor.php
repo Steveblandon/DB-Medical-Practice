@@ -691,12 +691,63 @@ else if( isset( $_POST['Submit2'] ) ) {
 	echo "</table>";
 
 }// end Submit2 
-		
 else if( isset( $_POST['Submit3'] ) ) {
+
+	$sql = "SELECT e.fName AS eFName, e.lName AS eLName, s.employeeID AS 	employeeID, s.workDays AS workDays, s.startTime AS 				startTime, s.endTime AS endTime
+			FROM schedule s, employee e
+			WHERE e.employeeID = s.employeeID"; 
+	$result = $conn -> query($sql);
+	$count = 1; 
+	echo "<table border = '1'>";
+	if($result -> num_rows > 0 ){
+		while($row = $result->fetch_assoc()) {
+			if($count == 1){
+				echo "<tr>";
+			   	echo "<td>EmployeeID: </td>".
+			   		" <td>Name: </td>".
+			   		" <td>Work Days: </td>".
+			   		" <td>Start Time </td>".
+			   		" <td>End Time </td>"; 
+			   	echo "</tr>";
+			    echo "<tr>";
+			   	echo "<td>". $row["employeeID"]."</td>".
+			   		" <td>". $row["eFName"]." " .$row["eLName"]."</td>".
+			   		" <td>". $row["workDays"]. "</td>".
+			   		" <td>". $row["startTime"]. "</td>".
+			   		" <td>". $row["endTime"]. "</td>"; 
+			   	echo "</tr>";
+			   	$count++;
+		 	  }
+		 	  else {
+		 	  	echo "<tr>";
+			   	echo "<td>". $row["employeeID"]."</td>".
+			   		" <td>". $row["eFName"]." " .$row["eLName"]."</td>".
+			   		" <td>". $row["workDays"]. "</td>".
+			   		" <td>". $row["startTime"]. "</td>".
+			   		" <td>". $row["endTime"]. "</td>";  
+			   	echo "</tr>";
+		 	  }
+		   }
+		}
+	echo "</table>";
+
+
+
+}	//end Submit3 	
+else if( isset( $_POST['Submit4'] ) ) {
 		/////////////////see thier schedule for the day 
 		$value1 = $_POST["doctorName"];
 		echo "Patient Appts For the Day: ";
-		$sql = "SELECT * FROM appointment WHERE employeeID = $value1";
+		if($value1 != null){
+			$sql = "SELECT  e.fName AS eFName, e.lName AS eLName, a.dateTime AS dateTime, a.patientID AS patientID, e.employeeID AS employeeID, a.checkedIn AS checkedIn
+					FROM appointment a, employee e 
+					WHERE e.employeeID = $value1 AND a.employeeID =$value1";
+			}
+			else {
+				$sql = "SELECT  e.fName AS eFName, e.lName AS eLName, a.dateTime AS dateTime, a.patientID AS patientID, e.employeeID AS employeeID, a.checkedIn AS checkedIn
+					FROM appointment a, employee e
+					WHERE e.employeeID = a.employeeID";
+			}
 		$result = $conn -> query($sql);
 		$count = 1; 
 		echo "<table border = '1'>";
@@ -704,24 +755,27 @@ else if( isset( $_POST['Submit3'] ) ) {
 			while($row = $result->fetch_assoc()) {
 				if($count == 1){
 					echo "<tr>";
-				   	echo "<td>Date: </td>".
-				   		" <td>PatientID: </td>".
+				   	echo "<td>Doctor Name: </td>".
 				   		" <td>EmployeeID: </td>".
-				   		" <td>Checked In? </td>";
+				   		" <td>Date: </td>".
+				   		" <td>PatientID: </td>".
+				   		" <td>Checked In?: </td>";
 				   	echo "</tr>";
 				    echo "<tr>";
-				   	echo "<td>". $row["dateTime"]."</td>".
-				   		" <td>". $row["patientID"]."</td>". 
-				   		" <td>". $row["employeeID"]. "</td>".
+				   	echo " <td>". $row["eFName"]." " .$row["eLName"]."</td>".
+						" <td>". $row["employeeID"]."</td>".
+				   		" <td>". $row["dateTime"]."</td>". 
+				   		" <td>". $row["patientID"]. "</td>".
 				   		" <td>". $row["checkedIn"]. "</td>";
 				   	echo "</tr>";
 				   	$count++;
 			 	  }
 			 	  else {
 			 	  	echo "<tr>";
-				   	echo "<td>". $row["dateTime"]."</td>".
-				   		" <td>". $row["patientID"]."</td>". 
-				   		" <td>". $row["employeeID"]. "</td>".
+				   	echo" <td>". $row["eFName"]." " .$row["eLName"]."</td>".
+						" <td>". $row["employeeID"]."</td>".
+				   		" <td>". $row["dateTime"]."</td>". 
+				   		" <td>". $row["patientID"]. "</td>".
 				   		" <td>". $row["checkedIn"]. "</td>";
 				   	echo "</tr>";
 			 	  }
@@ -729,7 +783,7 @@ else if( isset( $_POST['Submit3'] ) ) {
 			}
 		echo "</table>";
 
-		}
+} //end Submit4 
 else {
 		echo "GOODBYE";
 		}
