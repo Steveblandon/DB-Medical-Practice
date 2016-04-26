@@ -138,6 +138,10 @@ VALUES (CURTIME(),1,1,'Y');
 
 INSERT INTO Appointment (datetime, patientID, employeeID, checkedIn)
 VALUES (DATE_ADD(CURTIME(),INTERVAL 3 HOUR),2,1,'Y');
+INSERT INTO Appointment (`dateTime`, `patientID`, `employeeID`, `checkedIn`) VALUES
+('2016-04-25 12:22:00', 2, 5, 'N'),
+('2016-04-25 14:37:59', 1, 1, 'Y'),
+('2016-04-25 17:37:59', 2, 1, 'Y');
 
 DROP TABLE IF EXISTS Visitation;
 CREATE TABLE IF NOT EXISTS Visitation(
@@ -164,6 +168,9 @@ HR VARCHAR(10),
 currentMedications VARCHAR(50), 
 PRIMARY KEY (dateTime, patientID),
 FOREIGN KEY (dateTime, patientID) REFERENCES Appointment (dateTime, patientID));
+INSERT INTO `healthscreening` (`dateTime`, `patientID`, `smoker`, `pregnant`, `height`, `weight`, `bloodPressure`, `HR`, `currentMedications`) VALUES
+('2016-04-25 12:22:00', 2, 'Y', 'N', '5 9', 175, '150/75', '90', NULL),
+('2016-04-25 14:37:59', 1, 'N', 'N', '5 2', 190, '200/100', '96', 'Diabetes Medications');
 
 
 DROP TABLE IF EXISTS Prescription;
@@ -187,6 +194,9 @@ aDate DATE,
 result VARCHAR(100), 
 PRIMARY KEY(date, type, patientID),
 FOREIGN KEY(patientID) REFERENCES Patient(patientID));
+INSERT INTO MedicalTest (`date`, `type`, `patientID`, `testLocation`, `aDate`, `result`) VALUES
+('2016-04-25', 'XRay', 1, 'New Haven, Yale Hospital', '2016-04-26', 'Negative'),
+('2016-04-26', 'Blood Draw', 2, 'New Haven, Yale Hospital', '2016-04-27', 'Diabetes Test');
 
 
 DROP TABLE IF EXISTS Bill;
