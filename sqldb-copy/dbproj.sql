@@ -40,11 +40,13 @@ VALUES ('Katie','Ramos','Assistant',43000.00,'F', '19911223','45 Hubbert St',
 '1234657890', '132456789', '15624322652', '123789456');
 
 INSERT INTO Employee (fName, lName, position, salary, sex, 
-DOB, address, phoneNo, SSN, bankAcctNo, bankRoutingNo) VALUES(3, 'Sarah', 'Moses', 
-'Nurse', 30000.00, 'F', '1960-04-04', '11480 Dixwell Ave', '2034987472', '333445555', '47890243278', '47328978');
+DOB, address, phoneNo, SSN, bankAcctNo, bankRoutingNo) 
+VALUES('Sarah','Moses','Nurse',30000.00,'F','1960-04-04','11480 Dixwell Ave','2034987472',
+'333445555', '47890243278', '47328978');
 INSERT INTO Employee (fName, lName, position, salary, sex, 
-DOB, address, phoneNo, SSN, bankAcctNo, bankRoutingNo) VALUES (4, 'Ben', 'Flinestone',
- 'Office Manager', 90000.00, 'M', '1976-04-02', '78923 Walley Ave', '2034986666', '777889999', '72843904398', '23798432');
+DOB, address, phoneNo, SSN, bankAcctNo, bankRoutingNo) 
+VALUES ('Ben', 'Flinestone','Office Manager', 90000.00, 'M', '1976-04-02', 
+'78923 Walley Ave', '2034986666', '777889999', '72843904398', '23798432');
 
 DROP TABLE IF EXISTS Account;
 CREATE TABLE IF NOT EXISTS Account(
@@ -57,6 +59,10 @@ INSERT INTO Account (username, employeeID)
 VALUES ("Krugger1",1);
 INSERT INTO Account (username, employeeID)
 VALUES ("Ramos2",2);
+INSERT INTO Account (username, employeeID)
+VALUES ("Moses3",3);
+INSERT INTO Account (username, employeeID)
+VALUES ("Flinestone4",4);
 
 DROP TABLE IF EXISTS Patient;
 CREATE TABLE IF NOT EXISTS Patient(
