@@ -12,7 +12,7 @@ INSERT INTO Service (type, cost)
 VALUES ('General', '100.00');
 
 INSERT INTO Service (type, cost)
-VALUES ('physical', '200.00');
+VALUES ('Physical', '200.00');
 
 DROP TABLE IF EXISTS Employee;
 CREATE TABLE IF NOT EXISTS Employee(
@@ -160,6 +160,10 @@ serviceType VARCHAR(50) NOT NULL,
 PRIMARY KEY (dateTime, patientID),
 FOREIGN KEY (dateTime, patientID) REFERENCES Appointment (dateTime, patientID),
 FOREIGN KEY (serviceType) REFERENCES Service (type));
+INSERT INTO `visitation` (`dateTime`, `patientID`, `reasonForVisit`, `diagnosis`, `serviceType`) VALUES
+('2016-04-25 14:37:59', 1, 'qwertyifosdahfjsakdbfisdou', 'sabufibsdfuiosdbfiuoabsfoiusa', 'General'),
+('2016-04-25 17:37:59', 2, 'fsadfguiofsdofbsdoifbsofbsaoi', 'fbsdaiofbsaifbsodifbsaiudobfsiufbsiubfisaudfbisauobiudsbfiuadsbfiuoasbfiuoasbfiuobsafbiaosbfiosaubfiuoasbfiusabfisbfiusabfiosabfisbfisoufbisoa', 'physical');
+
 
 
 DROP TABLE IF EXISTS HealthScreening;
