@@ -9,10 +9,9 @@ type VARCHAR(50) PRIMARY KEY,
 cost FLOAT(8,2) NOT NULL);
 
 INSERT INTO Service (type, cost)
-VALUES ('General', '100.00');
-
-INSERT INTO Service (type, cost)
-VALUES ('Physical', '200.00');
+VALUES 
+('General', '100.00'),
+('Physical', '200.00');
 
 DROP TABLE IF EXISTS Employee;
 CREATE TABLE IF NOT EXISTS Employee(
@@ -31,22 +30,16 @@ bankRoutingNo CHAR(9) NOT NULL);
 
 INSERT INTO Employee (fName, lName, position, salary, sex, 
 DOB, address, phoneNo, SSN, bankAcctNo, bankRoutingNo)
-VALUES ('John','Krugger','Doctor',100000.00,'M', '19771105','11 Short Ave',
-'1234567890', '123456789', '13413354623', '123457689');
-
-INSERT INTO Employee (fName, lName, position, salary, sex, 
-DOB, address, phoneNo, SSN, bankAcctNo, bankRoutingNo)
-VALUES ('Katie','Ramos','Assistant',43000.00,'F', '19911223','45 Hubbert St',
-'1234657890', '132456789', '15624322652', '123789456');
-
-INSERT INTO Employee (fName, lName, position, salary, sex, 
-DOB, address, phoneNo, SSN, bankAcctNo, bankRoutingNo) 
-VALUES('Sarah','Moses','Nurse',30000.00,'F','1960-04-04','11480 Dixwell Ave','2034987472',
-'333445555', '47890243278', '47328978');
-INSERT INTO Employee (fName, lName, position, salary, sex, 
-DOB, address, phoneNo, SSN, bankAcctNo, bankRoutingNo) 
-VALUES ('Ben', 'Flinestone','Office Manager', 90000.00, 'M', '1976-04-02', 
+VALUES 
+('John','Krugger','Doctor',100000.00,'M', '19771105','11 Short Ave',
+'1234567890', '123456789', '13413354623', '123457689'),
+('Katie','Ramos','Assistant',43000.00,'F', '19911223','45 Hubbert St',
+'1234657890', '132456789', '15624322652', '123789456'),
+('Sarah','Moses','Nurse',30000.00,'F','1960-04-04','11480 Dixwell Ave','2034987472',
+'333445555', '47890243278', '47328978'),
+('Ben', 'Flinestone','Office Manager', 90000.00, 'M', '1976-04-02', 
 '78923 Walley Ave', '2034986666', '777889999', '72843904398', '23798432');
+
 
 DROP TABLE IF EXISTS Account;
 CREATE TABLE IF NOT EXISTS Account(
@@ -56,13 +49,11 @@ employeeID INT UNSIGNED,
 FOREIGN KEY (employeeID) REFERENCES Employee (employeeID));
 
 INSERT INTO Account (username, employeeID)
-VALUES ("Krugger1",1);
-INSERT INTO Account (username, employeeID)
-VALUES ("Ramos2",2);
-INSERT INTO Account (username, employeeID)
-VALUES ("Moses3",3);
-INSERT INTO Account (username, employeeID)
-VALUES ("Flinestone4",4);
+VALUES 
+("Krugger1",1),
+("Ramos2",2),
+("Moses3",3),
+("Flinestone4",4);
 
 DROP TABLE IF EXISTS Patient;
 CREATE TABLE IF NOT EXISTS Patient(
@@ -79,13 +70,9 @@ insurancePrimary VARCHAR(60));
 
 INSERT INTO Patient (fName, lName, sex, DOB, address, phoneNo, insuranceProvider,
 insuranceNo, insurancePrimary)
-VALUES ('James','Osborne','M','19650612','23 Roger St','1234567890','Cigna','21352845',
-'James Osborne');
-
-INSERT INTO Patient (fName, lName, sex, DOB, address, phoneNo, insuranceProvider,
-insuranceNo, insurancePrimary)
-VALUES ('Kenneth','Robertino','M','19780716','35 Lumbar St','1234569870','OnePlus','753155946',
-'Robert Robertino');
+VALUES 
+('James','Osborne','M','19650612','23 Roger St','1234567890','Cigna','21352845','James Osborne'),
+('Kenneth','Robertino','M','19780716','35 Lumbar St','1234569870','OnePlus','753155946','Robert Robertino');
 
 DROP TABLE IF EXISTS SalaryPaid;
 CREATE TABLE IF NOT EXISTS SalaryPaid(
@@ -110,10 +97,9 @@ endTime TIME NOT NULL,
 FOREIGN KEY (employeeID) REFERENCES Employee (employeeID));
 
 INSERT INTO Schedule (employeeID, workDays, startTime, endTime)
-VALUES (1,'MWF',CURTIME(),DATE_ADD(CURTIME(),INTERVAL 8 HOUR));
-
-INSERT INTO Schedule (employeeID, workDays, startTime, endTime)
-VALUES (2,'MTWRF',CURTIME(),DATE_ADD(CURTIME(),INTERVAL 8 HOUR));
+VALUES 
+(1,'MWF',CURTIME(),DATE_ADD(CURTIME(),INTERVAL 8 HOUR)),
+(2,'MTWRF',CURTIME(),DATE_ADD(CURTIME(),INTERVAL 8 HOUR));
 
 DROP TABLE IF EXISTS Immunization;
 CREATE TABLE IF NOT EXISTS Immunization(
@@ -124,10 +110,9 @@ PRIMARY KEY (patientID, date, type),
 FOREIGN KEY (patientID) REFERENCES Patient (patientID));
 
 INSERT INTO Immunization (patientID, date, type)
-VALUES (1,'20020515','measles');
-
-INSERT INTO Immunization (patientID, date, type)
-VALUES (2,'19990722','varicella');
+VALUES 
+(1,'20020515','measles'),
+(2,'19990722','varicella');
 
 DROP TABLE IF EXISTS Appointment;
 CREATE TABLE IF NOT EXISTS Appointment(
@@ -140,11 +125,9 @@ FOREIGN KEY (patientID) REFERENCES Patient (patientID),
 FOREIGN KEY (employeeID) REFERENCES Employee (employeeID));
 
 INSERT INTO Appointment (datetime, patientID, employeeID, checkedIn)
-VALUES (CURTIME(),1,1,'Y');
-
-INSERT INTO Appointment (datetime, patientID, employeeID, checkedIn)
-VALUES (DATE_ADD(CURTIME(),INTERVAL 3 HOUR),2,1,'Y');
-INSERT INTO Appointment (`dateTime`, `patientID`, `employeeID`, `checkedIn`) VALUES
+VALUES 
+(CURTIME(),1,1,'Y'),
+(DATE_ADD(CURTIME(),INTERVAL 3 HOUR),2,1,'Y'),
 ('2016-04-25 12:22:00', 2, 5, 'N'),
 ('2016-04-25 14:37:59', 1, 1, 'Y'),
 ('2016-04-25 17:37:59', 2, 1, 'Y');
@@ -173,6 +156,7 @@ HR VARCHAR(10),
 currentMedications VARCHAR(50), 
 PRIMARY KEY (dateTime, patientID),
 FOREIGN KEY (dateTime, patientID) REFERENCES Appointment (dateTime, patientID));
+
 INSERT INTO `healthscreening` (`dateTime`, `patientID`, `smoker`, `pregnant`, `height`, `weight`, `bloodPressure`, `HR`, `currentMedications`) VALUES
 ('2016-04-25 12:22:00', 2, 'Y', 'N', '5 9', 175, '150/75', '90', NULL),
 ('2016-04-25 14:37:59', 1, 'N', 'N', '5 2', 190, '200/100', '96', 'Diabetes Medications');
@@ -199,6 +183,7 @@ aDate DATE,
 result VARCHAR(100), 
 PRIMARY KEY(date, type, patientID),
 FOREIGN KEY(patientID) REFERENCES Patient(patientID));
+
 INSERT INTO MedicalTest (`date`, `type`, `patientID`, `testLocation`, `aDate`, `result`) VALUES
 ('2016-04-25', 'XRay', 1, 'New Haven, Yale Hospital', '2016-04-26', 'Negative'),
 ('2016-04-26', 'Blood Draw', 2, 'New Haven, Yale Hospital', '2016-04-27', 'Diabetes Test');
