@@ -29,24 +29,24 @@ SSN CHAR(9) NOT NULL,
 bankAcctNo VARCHAR(17) NOT NULL,
 bankRoutingNo CHAR(9) NOT NULL);
 
-INSERT INTO Employee (employeeID, fName, lName, position, salary, sex, 
+INSERT INTO Employee ( fName, lName, position, salary, sex, 
 DOB, address, phoneNo, SSN, bankAcctNo, bankRoutingNo)
-VALUES (1, 'John','Krugger','Doctor',100000.00,'M', '19771105','11 Short Ave',
+VALUES ('John','Krugger','Doctor',100000.00,'M', '19771105','11 Short Ave',
 '1234567890', '123456789', '13413354623', '123457689');
 
-INSERT INTO Employee (employeeID, fName, lName, position, salary, sex, 
+INSERT INTO Employee ( fName, lName, position, salary, sex, 
 DOB, address, phoneNo, SSN, bankAcctNo, bankRoutingNo)
-VALUES (2, 'Katie','Ramos','Assistant',43000.00,'F', '19911223','45 Hubbert St',
+VALUES ('Katie','Ramos','Assistant',43000.00,'F', '19911223','45 Hubbert St',
 '1234657890', '132456789', '15624322652', '123789456');
 
-INSERT INTO Employee (employeeID, fName, lName, position, salary, sex, 
+INSERT INTO Employee ( fName, lName, position, salary, sex, 
 DOB, address, phoneNo, SSN, bankAcctNo, bankRoutingNo) 
-VALUES(3, 'Sarah','Moses','Nurse',30000.00,'F','1960-04-04','11480 Dixwell Ave','2034987472',
+VALUES( 'Sarah','Moses','Nurse',30000.00,'F','1960-04-04','11480 Dixwell Ave','2034987472',
 '333445555', '47890243278', '47328978');
 
-INSERT INTO Employee (employeeID, fName, lName, position, salary, sex, 
+INSERT INTO Employee ( fName, lName, position, salary, sex, 
 DOB, address, phoneNo, SSN, bankAcctNo, bankRoutingNo) 
-VALUES (4, 'Ben', 'Flinestone','Office Manager', 90000.00, 'M', '1976-04-02', 
+VALUES ( 'Ben', 'Flinestone','Office Manager', 90000.00, 'M', '1976-04-02', 
 '78923 Walley Ave', '2034986666', '777889999', '72843904398', '23798432');
 
 DROP TABLE IF EXISTS Account;
