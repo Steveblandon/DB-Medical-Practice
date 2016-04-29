@@ -4,7 +4,19 @@
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	<script src="bootbox.min.js"></script>
 	<script src="dataRetrieval.js"></script>
+	<style>
+		.rowSelector {
+			background-color:rgb(205,205,205);
+		}
+		tbody tr:hover {
+			background-color:rgb(245,245,245);
+		}
+		tr.rowSelector:hover {
+			background-color:rgb(205,205,205);
+		}
+	</style>
 </head>
 <body> 
 <!--Office Mangager:
@@ -55,14 +67,7 @@
 				<li><a data-toggle="tab" href="#AddService">Add New Service</a></li>
 				</ul>
 			</li>
-			<li class="dropdown">
-			<a class="dropdown-toggle" data-toggle="dropdown" href="#">Employees
-			<span class="caret"></span></a>
-				<ul class="dropdown-menu">
-				<li><a data-toggle="tab" href="#ViewEmployee">View</a></li>
-				<li><a data-toggle="tab" href="#AddEmployee">Add New Employee</a></li>
-				</ul>
-			</li>
+			<li><a data-toggle="tab" href="#ViewEmployee">Employees</a></li>
 			<li class="dropdown">
 			<a class="dropdown-toggle" data-toggle="dropdown" href="#">Patients
 			<span class="caret"></span></a>
@@ -83,6 +88,9 @@
 		</div>
 		<div class="col-md-2"></div>
 	</div>
+	
+	
+	<!-- $CONTENT -->
 	<div class ="row" style="margin-top:20px"></div>
 	<div class="row">
 		<div class="tab-content">
@@ -106,10 +114,31 @@
 			<p class="text-center"> Add New Service </p>
 		</div>
 		<div id="ViewEmployee" class="tab-pane fade">
-			<p class="text-center"> View Employee </p>
-		</div>
-		<div id="AddEmployee" class="tab-pane fade">
-			<form role="form" action="addEmployee.php" method="post" autocomplete="off">
+			<div class="row" style="margin-bottom:10px">
+				<div class="col-md-2"></div>
+				<div class="col-md-8">
+					<div class="btn-group btn-group-justified">
+						<div class="btn-group">
+						<button class="btn btn-primary" value="add">add</button></div>
+						<div class="btn-group">
+						<button class="btn btn-primary" value="cancel">cancel</button></div>
+						<div class="btn-group">
+						<button class="btn btn-primary" value="edit">edit</button></div>
+						<div class="btn-group">
+						<button class="btn btn-primary" value="delete">delete</button></div>
+					</div>
+				</div>
+				<div class="col-md-2"></div>
+			</div>
+			<table class="table">
+				<thead>
+					<tr>
+						<th>column1</th>
+					</tr>
+				</thead>
+			</table>
+			<form role="form" id="employeeForm" autocomplete="off">
+			<input type="text" name="employeeID" style="display:none">
 			<div class="row">
 				<div class="col-md-4"></div>
 				<div class="col-md-2">
@@ -225,7 +254,7 @@
 				<div class="col-md-4"></div>
 				<div class="col-md-4">
 					<div class="form-group">
-					<input type="submit" class="form-control" value="submit">
+					<input type="submit" class="form-control" name="submit" value="submit">
 					</div>
 				</div>
 				<div class="col-md-4"></div>
@@ -234,6 +263,14 @@
 		</div>
 		<div id="ViewPatient" class="tab-pane fade">
 			<p class="text-center"> view patient </p>
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>column1</th>
+					</tr>
+				</thead>
+			</table>
+			</table>
 		</div>
 		<div id="AddPatient" class="tab-pane fade">
 			<p class="text-center"> Add Patient </p>

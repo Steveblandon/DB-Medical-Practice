@@ -27,5 +27,6 @@ VALUES (CONCAT('$lName',(SELECT employeeID FROM employee WHERE fName = '$fName' 
 if (!$conn->query($sql)){
 	die("query2 failed:" . $conn->error);
 }
-header("location: officeManager.html");
+
+echo "employee " . $fName . " " . $lName . " added successfully!";
 ?>
