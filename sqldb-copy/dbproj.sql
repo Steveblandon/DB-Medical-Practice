@@ -12,7 +12,7 @@ INSERT INTO Service (type, cost)
 VALUES ('General', '100.00');
 
 INSERT INTO Service (type, cost)
-VALUES ('physical', '200.00');
+VALUES ('Physical', '200.00');
 
 DROP TABLE IF EXISTS Employee;
 CREATE TABLE IF NOT EXISTS Employee(
@@ -29,23 +29,24 @@ SSN CHAR(9) NOT NULL,
 bankAcctNo VARCHAR(17) NOT NULL,
 bankRoutingNo CHAR(9) NOT NULL);
 
-INSERT INTO Employee (fName, lName, position, salary, sex, 
+INSERT INTO Employee (employeeID, fName, lName, position, salary, sex, 
 DOB, address, phoneNo, SSN, bankAcctNo, bankRoutingNo)
-VALUES ('John','Krugger','Doctor',100000.00,'M', '19771105','11 Short Ave',
+VALUES (1, 'John','Krugger','Doctor',100000.00,'M', '19771105','11 Short Ave',
 '1234567890', '123456789', '13413354623', '123457689');
 
-INSERT INTO Employee (fName, lName, position, salary, sex, 
+INSERT INTO Employee (employeeID, fName, lName, position, salary, sex, 
 DOB, address, phoneNo, SSN, bankAcctNo, bankRoutingNo)
-VALUES ('Katie','Ramos','Assistant',43000.00,'F', '19911223','45 Hubbert St',
+VALUES (2, 'Katie','Ramos','Assistant',43000.00,'F', '19911223','45 Hubbert St',
 '1234657890', '132456789', '15624322652', '123789456');
 
-INSERT INTO Employee (fName, lName, position, salary, sex, 
+INSERT INTO Employee (employeeID, fName, lName, position, salary, sex, 
 DOB, address, phoneNo, SSN, bankAcctNo, bankRoutingNo) 
-VALUES('Sarah','Moses','Nurse',30000.00,'F','1960-04-04','11480 Dixwell Ave','2034987472',
+VALUES(3, 'Sarah','Moses','Nurse',30000.00,'F','1960-04-04','11480 Dixwell Ave','2034987472',
 '333445555', '47890243278', '47328978');
-INSERT INTO Employee (fName, lName, position, salary, sex, 
+
+INSERT INTO Employee (employeeID, fName, lName, position, salary, sex, 
 DOB, address, phoneNo, SSN, bankAcctNo, bankRoutingNo) 
-VALUES ('Ben', 'Flinestone','Office Manager', 90000.00, 'M', '1976-04-02', 
+VALUES (4, 'Ben', 'Flinestone','Office Manager', 90000.00, 'M', '1976-04-02', 
 '78923 Walley Ave', '2034986666', '777889999', '72843904398', '23798432');
 
 DROP TABLE IF EXISTS Account;
@@ -145,7 +146,7 @@ VALUES (CURTIME(),1,1,'Y');
 INSERT INTO Appointment (datetime, patientID, employeeID, checkedIn)
 VALUES (DATE_ADD(CURTIME(),INTERVAL 3 HOUR),2,1,'Y');
 INSERT INTO Appointment (`dateTime`, `patientID`, `employeeID`, `checkedIn`) VALUES
-('2016-04-25 12:22:00', 2, 5, 'N'),
+('2016-04-25 12:22:00', 2, 3, 'N'),
 ('2016-04-25 14:37:59', 1, 1, 'Y'),
 ('2016-04-25 17:37:59', 2, 1, 'Y');
 
@@ -159,6 +160,10 @@ serviceType VARCHAR(50) NOT NULL,
 PRIMARY KEY (dateTime, patientID),
 FOREIGN KEY (dateTime, patientID) REFERENCES Appointment (dateTime, patientID),
 FOREIGN KEY (serviceType) REFERENCES Service (type));
+INSERT INTO `visitation` (`dateTime`, `patientID`, `reasonForVisit`, `diagnosis`, `serviceType`) VALUES
+('2016-04-25 14:37:59', 1, 'qwertyifosdahfjsakdbfisdou', 'sabufibsdfuiosdbfiuoabsfoiusa', 'General'),
+('2016-04-25 17:37:59', 2, 'fsadfguiofsdofbsdoifbsofbsaoi', 'fbsdaiofbsaifbsodifbsaiudobfsiufbsiubfisaudfbisauobiudsbfiuadsbfiuoasbfiuoasbfiuobsafbiaosbfiosaubfiuoasbfiusabfisbfiusabfiosabfisbfisoufbisoa', 'physical');
+
 
 
 DROP TABLE IF EXISTS HealthScreening;
