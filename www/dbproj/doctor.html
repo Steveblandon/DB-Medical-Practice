@@ -1,38 +1,13 @@
-<!DOCTYPE html>
 <html> 
 <head>
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-	<script>
-		//ignore this function for now, just experimenting
-		function editTable(element)
-		{
-			htm = element.innerHTML;
-			element.innerHTML = "<input type='text' value='" + htm + "'>";
-		}
-	</script>
+	<script src="dataRetrieval.js"></script>
 </head>
 <body> 
-<!--Nurse:
-Patient: 
-	view 
-		One Patient 
-		all 
-	update info
-Doctor 
-	view schedule
-	view appts 
 
 
-See for every patient: 
-appointment 
-health screening
-immunization 
-medical tests
-prescription 
-visit 
--->
 
 <navbar>
 <div class="container">
@@ -48,10 +23,15 @@ visit
 		<ul class="nav nav-tabs">
 			<li class="active"><a data-toggle="tab" href="#Home">Home</a></li>
 			<li class="dropdown">
-			<a class="dropdown-toggle" data-toggle="dropdown" href="#">Patients
+			<a class="dropdown-toggle" data-toggle="dropdown" href="#">View Patient Info
 			<span class="caret"></span></a>
 				<ul class="dropdown-menu">
-				<li><a data-toggle="tab" href="#ViewPatient">Search</a></li>
+				<li><a data-toggle="tab" href="#ViewPatient">General</a></li>
+				<li><a data-toggle="tab" href="#ViewPatientAppt">Appointment</a></li>
+				<li><a data-toggle="tab" href="#ViewPatientHealthScreen">Health Screening</a></li>
+				<li><a data-toggle="tab" href="#ViewPatientImm">Immunization</a></li>
+				<li><a data-toggle="tab" href="#ViewPatientMedicalTest">Medical Tests</a></li>
+				<li><a data-toggle="tab" href="#ViewPatientVisit">Visit</a></li>
 				<li><a data-toggle="tab" href="#UpdatePatient">Update Patient</a></li>
 				</ul>
 			</li>
@@ -59,8 +39,8 @@ visit
 			<a class="dropdown-toggle" data-toggle="dropdown" href="#">Doctor
 			<span class="caret"></span></a>
 				<ul class="dropdown-menu">
-				<li><a data-toggle="tab" href="#ViewSchedule">View Schedule</a></li>
-				<li><a data-toggle="tab" href="#ViewAppt">View Appointments</a></li>
+				<li><a data-toggle="tab" href="#ViewEmployeeSchedule">View Schedule</a></li>
+				<li><a data-toggle="tab" href="#ViewEmployeeAppt">View Appointments</a></li>
 				</ul>
 			</li>
 		</div>
@@ -70,59 +50,51 @@ visit
 		<div class="col-md-2"></div>
 		<div class="col-md-8">
 			<div class="tab-content">
-				<div id="Home" class="tab-pane fade in active">
-					<h1 class="text-center"> Welcome! </h1>
-					<p class="text-center"> Doctor suite </p>
+				<div id='Home' class='tab-pane fade in active'>
+					<h1 class='text-center'> Welcome! </h1>
+					<p class='text-center'> Nurse suite </p>
 				</div>
-				<div id="ViewPatient" class="tab-pane fade">
-					<p> View patient 
-					<form action = 'doctor.php' method = 'post'>
-					Patient to seach for: <input type = "text" name = "Name"> <br> <br>
-
-					<input type="radio" name="table" value="patient" checked> Patient <br>
-					<input type="radio" name="table" value="appointment"> Appointment <br>
- 					<input type="radio" name="table" value="healthscreening"> Health Screening <br>
- 					<input type="radio" name="table" value="immunization"> Immunization <br>
- 					<input type="radio" name="table" value="medicaltest"> Medical Tests <br>
- 					<input type="radio" name="table" value="visitation"> Visit <br>
-
-					<input type = 'submit' value = 'Search for A Patient' name = 'Submit1' class="btn btn-primary"> 
-					<input type = 'submit' value = 'View All Patients' name = 'Submit1_1' class="btn btn-primary">
-					</p>
+				<div id='ViewPatient' class='tab-pane fade'>
+				<p>View patient 
+				</p>
 				</div>
+				
+				<div id="ViewPatientAppt" class="tab-pane fade">
+				View Apointment Table 
+				</div>
+
+				<div id="ViewPatientHealthScreen" class="tab-pane fade">
+				View Health Screening Table 
+				</div>
+
+				<div id="ViewPatientImm" class="tab-pane fade">
+				View Immunization Table 
+				</div>
+
+				<div id="ViewPatientAppt" class="tab-pane fade">
+				View Apointment Table 
+				</div>
+
+				<div id="ViewPatientMedicalTest" class="tab-pane fade">
+				View Medical Test Table 
+				</div>
+
+				<div id="ViewPatientVisit" class="tab-pane fade">
+				View Visit Test Table 
+				</div>
+
 				<div id="UpdatePatient" class="tab-pane fade">
-					<p> Update Patient 
-					<form action = 'doctor.php' method = 'post'>
-					Name to update: <br>
-					First: <input type = "text" name = "fName2"> <br>
-					Last Name: <input type = "text" name = "lName2"> <br> 
-					What to update? <br>
-					<input type="radio" name="info" value="fName"> First Name<br>
-  					<input type="radio" name="info" value="lName"> Last Name<br>
- 					<input type="radio" name="info" value="sex"> Sex <br>
- 					<input type="radio" name="info" value="DOB"> DOB <br>
- 					<input type="radio" name="info" value="address" checked> Address <br>
- 					<input type="radio" name="info" value="phoneNo"> Phone Number <br>
- 					<input type="radio" name="info" value="insuranceProvider"> Insurance Provider <br>
- 					<input type="radio" name="info" value="insuranceNo"> Insurance Number <br>
- 					<input type="radio" name="info" value="InsurancePrimary"> Insurance Primary <br>
+				Update Patient 
+				</div>
 
-					New Information: <input type = "text" name = "change"> <br> 
-					<input type = 'submit' value = 'Update Patient' name = 'Submit2' class="btn btn-primary">
+
+<!-- _______________________________________________________________________________________-->				
+				<div id="ViewEmployeeSchedule" class="tab-pane fade">
+					<p> View Weekly Schedule  
 					</p>
 				</div>
-				<div id="ViewSchedule" class="tab-pane fade">
-					<p> View Weekly Schedule  <br>
-					<input type = 'submit' value = 'View Schedules' name = 'Submit3' class="btn btn-primary">
-
-
-					</p>
-				</div>
-				<div id="ViewAppt" class="tab-pane fade">
+				<div id="ViewEmployeeAppt" class="tab-pane fade">
 					<p> View Daily Patient Schedule   
-					Doctor ID: <input type = "text" name = "doctorName"> <br> 
-					<input type = 'submit' value = 'View Schedule' name = 'Submit4' class="btn btn-primary">
-
 					</p>
 				</div>
 
@@ -136,6 +108,10 @@ visit
 	
 </div>
 <navbar>
+
+
+
+
 
 </body>
 <html> 
