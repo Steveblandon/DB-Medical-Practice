@@ -1,30 +1,30 @@
 <?php
 require "dbConnect.php";
 
-$table = "";
+$sql = "";
 //add table connections here
 if (strpos(strtolower($_POST["type"]),"employee") != false){
-	$table = "employee";
+	$sql = "SELECT * FROM employee";
 }
 else if (strpos(strtolower($_POST["type"]),"service") != false){
-	$table = "service";
+	$sql = "SELECT * FROM service";
 }
 else if (strpos(strtolower($_POST["type"]),"patient") != false){
-	$table = "patient";
+	$sql = "SELECT * FROM patient";
 }
 else if (strpos(strtolower($_POST["type"]),"appointment") != false){
-	$table = "appointment";
+	$sql = "SELECT * FROM appointment";
 }
 else if (strpos(strtolower($_POST["type"]),"bill") != false){
-	$table = "bill";
+	$sql = "SELECT * FROM bill";
 }
 else if (strpos(strtolower($_POST["type"]),"claim") != false){
-	$table = "claim";
+	$sql = "SELECT * FROM claim";
 }
 //add table connections here
 
 
-$sql = "SELECT * FROM $table";
+
 $result = $conn->query($sql);
 if (!$result){
 	die("query failed" . $conn->error);
