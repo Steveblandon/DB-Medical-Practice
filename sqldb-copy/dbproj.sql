@@ -10,6 +10,7 @@ cost FLOAT(8,2) NOT NULL);
 
 INSERT INTO Service (type, cost)
 VALUES 
+('Basic', '50.00'),
 ('General', '100.00'),
 ('Physical', '200.00');
 
@@ -74,19 +75,6 @@ VALUES
 ('James','Osborne','M','19650612','23 Roger St','1234567890','Cigna','21352845','James Osborne'),
 ('Kenneth','Robertino','M','19780716','35 Lumbar St','1234569870','OnePlus','753155946','Robert Robertino');
 
-DROP TABLE IF EXISTS SalaryPaid;
-CREATE TABLE IF NOT EXISTS SalaryPaid(
-date DATE NOT NULL,
-employeeID INT UNSIGNED NOT NULL,
-amount FLOAT(9,2) NOT NULL,
-PRIMARY KEY (date, employeeID),
-FOREIGN KEY (employeeID) REFERENCES Employee (employeeID));
-
-INSERT INTO SalaryPaid (date, employeeID, amount)
-VALUES (CURDATE(),1,(SELECT salary FROM Employee WHERE employeeID = 1) / 12);
-
-INSERT INTO SalaryPaid (date, employeeID, amount)
-VALUES (CURDATE(),2,(SELECT salary FROM Employee WHERE employeeID = 2) / 12);
 
 DROP TABLE IF EXISTS Schedule;
 CREATE TABLE IF NOT EXISTS Schedule(
@@ -191,24 +179,25 @@ INSERT INTO MedicalTest (`date`, `type`, `patientID`, `testLocation`, `aDate`, `
 
 DROP TABLE IF EXISTS Bill;
 CREATE TABLE IF NOT EXISTS Bill(
-billNo INT UNSIGNED AUTO_INCREMENT NOT NULL, 
-status_bill VARCHAR(20),
-dateTime DATETIME NOT NULL, 
+billNo INT UNSIGNED AUTO_INCREMENT NOT NULL,
+bill_status VARCHAR(20),
+dateTime DATETIME NOT NULL,
 patientID INT UNSIGNED NOT NULL,
-amountCharged FLOAT(9,2), 
-amountPaid FLOAT(9,2), 
-outstandingBalance FLOAT(9,2), 
+amountCharged FLOAT(9,2),
+amountPaid FLOAT(9,2),
+outstandingBalance FLOAT(9,2),
 serviceType VARCHAR(50),
 PRIMARY KEY(billNo),
 FOREIGN KEY (dateTime, patientID) REFERENCES Appointment (dateTime, patientID),
-FOREIGN KEY (serviceType) REFERENCES Service (type));
+FOREIGN KEY (serviceType) REFERENCES Service (type),
+FOREIGN KEY (amountCharged) REFERENCES Service (cost) ON UPDATE CASCADE);
 
 
 DROP TABLE IF EXISTS Claim;
 CREATE TABLE IF NOT EXISTS Claim(
-billNo INT UNSIGNED NOT NULL, 
-amount FLOAT(9,2), 
-status_claim VARCHAR(50), 
-response VARCHAR(50), 
+billNo INT UNSIGNED NOT NULL,
+amount FLOAT(9,2),
+status_claim VARCHAR(50),
+response VARCHAR(50),
 PRIMARY KEY(billNo),
 FOREIGN KEY(billNo) REFERENCES Bill(billNo));
