@@ -6,6 +6,9 @@ $table = "";
 if (strpos(strtolower($_POST["type"]),"employee") != false){
 	$table = "employee";
 }
+else if (strpos(strtolower($_POST["type"]),"service") != false){
+	$table = "service";
+}
 //add table connections here
 
 

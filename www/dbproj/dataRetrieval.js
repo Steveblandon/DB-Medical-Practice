@@ -1,3 +1,11 @@
+/*things to update to add new view
+	updateForm()
+	forwardForm()
+	deleteRecord()
+	
+outside of this script you'll need to modify the getDataTable.php
+and add edit, add, and delete php files
+*/
 
 function updateForm(fid, inputs_assoc, values_assoc){
 	//use this function to update specific forms, each form should have an unique identifier
@@ -16,6 +24,12 @@ function updateForm(fid, inputs_assoc, values_assoc){
 		$(inputs_assoc["bankRoutingNo"]).val(values_assoc["bankRoutingNo"]);
 		$(inputs_assoc["submit"]).val("update");
 	}
+	else if(fid == "servicesForm"){
+		$(inputs_assoc["type"]).val(values_assoc["type"]);
+		$(inputs_assoc["type"]).attr("disabled",true);
+		$(inputs_assoc["cost"]).val(values_assoc["cost"]);
+		$(inputs_assoc["submit"]).val("update");
+	}
 }
 
 function forwardForm(fid, serializedData, submitType){
@@ -25,8 +39,18 @@ function forwardForm(fid, serializedData, submitType){
 			bootbox.alert(output);
 		});
 	}
-	if(fid == "employeeForm" && submitType == "submit"){
+	else if(fid == "employeeForm" && submitType == "submit"){
 		$.post("addEmployee.php", serializedData, function(output, status){
+			bootbox.alert(output);
+		});
+	}
+	else if(fid == "servicesForm" && submitType == "update"){		
+		$.post("editService.php", serializedData, function(output, status){
+			bootbox.alert(output);
+		});
+	}
+	else if(fid == "servicesForm" && submitType == "submit"){
+		$.post("addService.php", serializedData, function(output, status){
 			bootbox.alert(output);
 		});
 	}
@@ -43,6 +67,7 @@ function resetForm(inputs){
 				break;
 			default:
 				$(inputs[i]).val("");
+				$(inputs[i]).attr("disabled",false);
 		}
 	}
 }
@@ -51,6 +76,11 @@ function deleteRecord(fid, dataObj){
 	//use this to specify what php file to use to delete a record from a table
 	if (fid == "ViewEmployee"){
 		$.post("deleteEmployee.php",dataObj, function(output, status){
+			bootbox.alert(output);
+		});
+	}
+	else if (fid == "ViewService"){
+		$.post("deleteService.php",dataObj, function(output, status){
 			bootbox.alert(output);
 		});
 	}
@@ -209,8 +239,8 @@ $(document).ready(function(){
 		for(var i=0; i<inputs.length; i++){
 			if($(inputs[i]).attr("name") == "submit"){
 				submitType = inputs[i];
-				break;
 			}
+			$(inputs[i]).attr("disabled",false);
 		}
 		var values = $(this).serialize();
 		forwardForm($(this).attr("id"), values, $(submitType).attr("value"));
