@@ -59,31 +59,10 @@
 				<li><a data-toggle="tab" href="#Salaries">Salaries</a></li>
 				</ul>
 			</li>
-			<li class="dropdown">
-			<a class="dropdown-toggle" data-toggle="dropdown" href="#">Services
-			<span class="caret"></span></a>
-				<ul class="dropdown-menu">
-				<li><a data-toggle="tab" href="#ViewService">View</a></li>
-				<li><a data-toggle="tab" href="#AddService">Add New Service</a></li>
-				</ul>
-			</li>
+			<li><a data-toggle="tab" href="#ViewService">Services</a></li>
 			<li><a data-toggle="tab" href="#ViewEmployee">Employees</a></li>
-			<li class="dropdown">
-			<a class="dropdown-toggle" data-toggle="dropdown" href="#">Patients
-			<span class="caret"></span></a>
-				<ul class="dropdown-menu">
-				<li><a data-toggle="tab" href="#ViewPatient">Search</a></li>
-				<li><a data-toggle="tab" href="#AddPatient">Add New Patient</a></li>
-				</ul>
-			</li>
-			<li class="dropdown">
-			<a class="dropdown-toggle" data-toggle="dropdown" href="#">Appointments
-			<span class="caret"></span></a>
-				<ul class="dropdown-menu">
-				<li><a data-toggle="tab" href="#ViewAppt">View</a></li>
-				<li><a data-toggle="tab" href="#AddAppt">Add New Appointment</a></li>
-				</ul>
-			</li>
+			<li><a data-toggle="tab" href="#ViewPatient">Patients</a></li>
+			<li><a data-toggle="tab" href="#ViewAppt">Appointments</a></li>
 		</ul>
 		</div>
 		<div class="col-md-2"></div>
@@ -100,18 +79,43 @@
 		</div>
 		<div id="Payments" class="tab-pane fade">
 			<p class="text-center"> Payments </p>
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>column1</th>
+					</tr>
+				</thead>
+			</table>
 		</div>
 		<div id="Claims" class="tab-pane fade">
 			<p class="text-center"> Claims </p>
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>column1</th>
+					</tr>
+				</thead>
+			</table>
 		</div>
 		<div id="Salaries" class="tab-pane fade">
 			<p class="text-center"> Salaries </p>
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>column1</th>
+					</tr>
+				</thead>
+			</table>
 		</div>
 		<div id="ViewService" class="tab-pane fade">
 			<p class="text-center"> view services </p>
-		</div>
-		<div id="AddService" class="tab-pane fade">
-			<p class="text-center"> Add New Service </p>
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>column1</th>
+					</tr>
+				</thead>
+			</table>
 		</div>
 		<div id="ViewEmployee" class="tab-pane fade">
 			<div class="row" style="margin-bottom:10px">
@@ -121,11 +125,11 @@
 						<div class="btn-group">
 						<button class="btn btn-primary" value="add">add</button></div>
 						<div class="btn-group">
-						<button class="btn btn-primary" value="cancel">cancel</button></div>
+						<button class="btn btn-danger" value="cancel">cancel</button></div>
 						<div class="btn-group">
 						<button class="btn btn-primary" value="edit">edit</button></div>
 						<div class="btn-group">
-						<button class="btn btn-primary" value="delete">delete</button></div>
+						<button class="btn btn-danger" value="delete">delete</button></div>
 					</div>
 				</div>
 				<div class="col-md-2"></div>
@@ -144,14 +148,14 @@
 				<div class="col-md-2">
 					<div class="form-group">
 						<label>First Name:
-						<input type="text" class="form-control" name="fName">
+						<input type="text" class="form-control" name="fName" required>
 						</label>
 					</div>
 				</div>
 				<div class="col-md-2">
 					<div class="form-group">
 						<label>Last Name:
-						<input type="text" class="form-control" name="lName">
+						<input type="text" class="form-control" name="lName" required>
 						</label>
 					</div>
 				</div>
@@ -162,7 +166,7 @@
 				<div class="col-md-2">
 					<div class="form-group">
 						<label>Date of Birth:
-						<input type="date" class="form-control" name="date">
+						<input type="date" class="form-control" name="date" required>
 						</label>
 					</div>
 				</div>
@@ -170,10 +174,10 @@
 					<div class="form-group">
 						<label>Gender:<br>
 						<label class="radio-inline">
-						<input type="radio" name="sex" value="M">M
+						<input type="radio" name="sex" value="M" required>M
 						</label>
 						<label class="radio-inline">
-						<input type="radio" name="sex" value="F">F
+						<input type="radio" name="sex" value="F" required>F
 						</label>
 						</label>
 					</div>
@@ -185,14 +189,14 @@
 				<div class="col-md-2">
 					<div class="form-group">
 						<label>Address:
-						<input type="text" class="form-control" name="address">
+						<input type="text" class="form-control" name="address" required>
 						</label>
 					</div>
 				</div>
 				<div class="col-md-2">
 					<div class="form-group">
 						<label>Phone Number:
-						<input type="text" class="form-control" name="phoneNo" maxlength="10">
+						<input type="text" class="form-control" name="phoneNo" maxlength="10" required>
 						</label>
 					</div>
 				</div>
@@ -203,7 +207,7 @@
 				<div class="col-md-4">
 					<div class="form-group">
 						<label>SSN:
-						<input type="text" class="form-control" name="ssn" maxlength="9" size="100%">
+						<input type="text" class="form-control" name="ssn" maxlength="9" size="100%" required>
 						</label>
 					</div>
 				</div>
@@ -214,14 +218,14 @@
 				<div class="col-md-2">
 					<div class="form-group">
 						<label>Bank Account No:
-						<input type="text" class="form-control" name="bankAcctNo" maxlength="17">
+						<input type="text" class="form-control" name="bankAcctNo" maxlength="17" required>
 						</label>
 					</div>
 				</div>
 				<div class="col-md-2">
 					<div class="form-group">
 						<label>Bank Routing No:
-						<input type="text" class="form-control" name="bankRoutingNo" maxlength="9">
+						<input type="text" class="form-control" name="bankRoutingNo" maxlength="9" required>
 						</label>
 					</div>
 				</div>
@@ -232,7 +236,7 @@
 				<div class="col-md-2">
 					<div class="form-group">
 						<label>Position:
-						<select class="form-control" name="position">
+						<select class="form-control" name="position" required>
 							<option value="Office Manager">Office Manager</option>
 							<option value="Assistant">Assistant</option>
 							<option value="Doctor">Doctor</option>
@@ -244,7 +248,7 @@
 				<div class="col-md-2">
 					<div class="form-group">
 						<label>Salary:
-						<input type="text" class="form-control" name="salary">
+						<input type="text" class="form-control" name="salary" required>
 						</label>
 					</div>
 				</div>
@@ -254,7 +258,7 @@
 				<div class="col-md-4"></div>
 				<div class="col-md-4">
 					<div class="form-group">
-					<input type="submit" class="form-control" name="submit" value="submit">
+					<input type="submit" class="form-control btn-primary" name="submit" value="submit">
 					</div>
 				</div>
 				<div class="col-md-4"></div>
@@ -270,19 +274,17 @@
 					</tr>
 				</thead>
 			</table>
-			</table>
 		</div>
-		<div id="AddPatient" class="tab-pane fade">
-			<p class="text-center"> Add Patient </p>
-		</div>
-		<div id="DelPatient" class="tab-pane fade">
-			<p class="text-center"> Delete Patient </p>
-		</div>
+		
 		<div id="ViewAppt" class="tab-pane fade">
 			<p class="text-center"> view appointments </p>
-		</div>
-		<div id="AddAppt" class="tab-pane fade">
-			<p class="text-center"> Add New appointment </p>
+			<table class="table table-hover">
+				<thead>
+					<tr>
+						<th>column1</th>
+					</tr>
+				</thead>
+			</table>
 		</div>
 		</div>
 	</div>

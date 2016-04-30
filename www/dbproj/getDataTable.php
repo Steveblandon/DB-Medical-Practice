@@ -1,11 +1,18 @@
 <?php
 require "dbConnect.php";
 
+$table = "";
+//add table connections here
+if (strpos(strtolower($_POST["type"]),"employee") != false){
+	$table = "employee";
+}
+//add table connections here
 
-$sql = "SELECT * FROM employee";
+
+$sql = "SELECT * FROM $table";
 $result = $conn->query($sql);
 if (!$result){
-	die("query failed");
+	die("query failed" . $conn->error);
 }
 
 echo "<thead><tr>";
