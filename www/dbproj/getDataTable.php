@@ -13,7 +13,10 @@ else if (strpos(strtolower($_POST["type"]),"patient") != false){
 	$sql = "SELECT * FROM patient";
 }
 else if (strpos(strtolower($_POST["type"]),"appointment") != false){
-	$sql = "SELECT * FROM appointment";
+	$sql = "SELECT DATE_FORMAT(a.dateTime,'%Y-%m-%d %H:%i') AS date, CONCAT(p.fName,' ', p.lName) AS patient, a.patientID,
+	CONCAT(e.fName,' ',e.lName) AS doctor, a.employeeID, a.checkedIn
+	FROM appointment a, patient p, employee e
+	WHERE a.patientID = p.patientID AND a.employeeID = e.employeeID";
 }
 else if (strpos(strtolower($_POST["type"]),"bill") != false){
 	$sql = "SELECT * FROM bill";

@@ -1,10 +1,9 @@
-/*things to update to add new view
+/*things to update when integrating new view
 	updateForm()
-	forwardForm()
-	deleteRecord()
 	
-outside of this script you'll need to modify the getDataTable.php
-and add edit, add, and delete php files
+modify the getDataTable.php
+and add edit, add, and delete php files to handle database manipulation
+this script automatically looks for the appropriate php handler as long as they are named appropriately
 */
 
 function updateForm(fid, inputs_assoc, values_assoc){
@@ -22,41 +21,48 @@ function updateForm(fid, inputs_assoc, values_assoc){
 		$(inputs_assoc["ssn"]).val(values_assoc["SSN"]);
 		$(inputs_assoc["bankAcctNo"]).val(values_assoc["bankAcctNo"]);
 		$(inputs_assoc["bankRoutingNo"]).val(values_assoc["bankRoutingNo"]);
-		$(inputs_assoc["submit"]).val("update");
 	}
 	else if(fid == "servicesForm"){
 		$(inputs_assoc["type"]).val(values_assoc["type"]);
 		$(inputs_assoc["type"]).attr("disabled",true);
 		$(inputs_assoc["cost"]).val(values_assoc["cost"]);
-		$(inputs_assoc["submit"]).val("update");
 	}
+	else if(fid == "appointmentForm"){
+		$(inputs_assoc["date"]).val(values_assoc["date"].replace(" ","T"));
+		$.get("getPatientOptions.php", function(data, status){
+			$(inputs_assoc["patient"]).html(data);
+			$(inputs_assoc["patient"]).val(values_assoc["patientID"]);
+		});
+		$.get("getDoctorOptions.php", function(data, status){
+			$(inputs_assoc["doctor"]).html(data);
+			$(inputs_assoc["doctor"]).val(values_assoc["employeeID"]);
+		});
+		if (values_assoc["checkedIn"] == "Y") $(inputs_assoc["checkedIn"]).val("N");
+		else $(inputs_assoc["checkedIn"]).val("Y");
+	}
+	
+	//do this for every form:
+	$(inputs_assoc["submit"]).val("update");
 }
 
 function forwardForm(fid, serializedData, submitType){
-	//use this function to send forms to php files for processing without having to go to another page
-	if(fid == "employeeForm" && submitType == "update"){		
-		$.post("editEmployee.php", serializedData, function(output, status){
-			bootbox.alert(output);
-		});
+	var filename = fid.charAt(0).toUpperCase() + fid.replace("Form","").slice(1);
+	var handler = null;
+	switch(submitType){
+		case "submit":
+			handler = "add" + filename + ".php";
+			break;
+		case "update":
+			handler = "edit" + filename + ".php";
+			break;
 	}
-	else if(fid == "employeeForm" && submitType == "submit"){
-		$.post("addEmployee.php", serializedData, function(output, status){
-			bootbox.alert(output);
-		});
-	}
-	else if(fid == "servicesForm" && submitType == "update"){		
-		$.post("editService.php", serializedData, function(output, status){
-			bootbox.alert(output);
-		});
-	}
-	else if(fid == "servicesForm" && submitType == "submit"){
-		$.post("addService.php", serializedData, function(output, status){
-			bootbox.alert(output);
-		});
-	}
+	$.post(handler, serializedData, function(output, status){
+		bootbox.alert(output);
+	});
 }
 
-function resetForm(inputs){
+function resetForm(fid, inputs){
+	//generic resets that apply to various forms
 	for(var i=0; i< inputs.length; i++){
 		switch($(inputs[i]).attr("type")){
 			case "submit":
@@ -70,20 +76,42 @@ function resetForm(inputs){
 				$(inputs[i]).attr("disabled",false);
 		}
 	}
+	
+	//resets specific to certain forms
+	if (fid == "appointmentForm"){
+		$.get("getPatientOptions.php", function(data, status){
+			var input = $("select[name='patient']","#"+fid);
+			$(input).html(data);
+			$(input).val("");
+		});
+		$.get("getDoctorOptions.php", function(data, status){
+			var input = $("select[name='doctor']","#"+fid);
+			$(input).html(data);
+			$(input).val("");
+		});
+	}
+}
+
+function processForm(form){
+	//this function processes a form for any changes before serializing and forwarding
+	var inputs = $(form).find("input");
+	var submitType = null;
+	for(var i=0; i<inputs.length; i++){
+		if($(inputs[i]).attr("name") == "submit"){
+			submitType = inputs[i];
+		}
+		//things to do before serializing form
+		$(inputs[i]).attr("disabled",false);
+	}
+	var values = $(form).serialize();
+	forwardForm($(form).attr("id"), values, $(submitType).attr("value"));
 }
 
 function deleteRecord(fid, dataObj){
-	//use this to specify what php file to use to delete a record from a table
-	if (fid == "ViewEmployee"){
-		$.post("deleteEmployee.php",dataObj, function(output, status){
-			bootbox.alert(output);
-		});
-	}
-	else if (fid == "ViewService"){
-		$.post("deleteService.php",dataObj, function(output, status){
-			bootbox.alert(output);
-		});
-	}
+	var handler = "delete" + fid.replace("View","") + ".php";
+	$.post(handler,dataObj, function(output, status){
+		bootbox.alert(output);
+	});
 }
 
 function getFormAssoc(form){
@@ -106,22 +134,21 @@ function getRecordAssoc(names, values){
 function displayView(content){
 	var table = findChild($(content).children(),"table");
 	var form = findChild($(content).children(),"form");
-	var buttons = $(content).find("button");
 	$.post("getDataTable.php", {type:$(content).attr("id")}, function(data, status){
 		table.innerHTML = data;
 	});
 	$(form).hide();
 	$(table).show();
-	var buttons_assoc = {};
-	for(var i=0; i<buttons.length; i++){
-		buttons_assoc[buttons[i].innerHTML] = buttons[i];
-	}
-	$(buttons_assoc["cancel"]).parent().hide();
-	$(buttons_assoc["edit"]).parent().show();
-	$(buttons_assoc["add"]).parent().show();
-	$(buttons_assoc["delete"]).parent().show();
-	buttons_assoc["edit"].disabled = true;
-	buttons_assoc["delete"].disabled = true;
+	var buttons_assoc = getButtons_assoc(content);
+	//the following are enveloped in try/catch blocks incase a button is not used
+	try{$(buttons_assoc["cancel"]).parent().hide();}catch(err){}
+	try{$(buttons_assoc["edit"]).parent().show();}catch(err){}
+	try{$(buttons_assoc["checkedIn"]).parent().show();}catch(err){}
+	try{$(buttons_assoc["add"]).parent().show();}catch(err){}
+	try{$(buttons_assoc["delete"]).parent().show();}catch(err){}
+	try{buttons_assoc["edit"].disabled = true;}catch(err){}
+	try{buttons_assoc["delete"].disabled = true;}catch(err){}
+	try{buttons_assoc["checkedIn"].disabled = true;}catch(err){}
 }
 
 function findChild(array, searchTag){
@@ -136,6 +163,15 @@ function findChild(array, searchTag){
 	return object;
 }
 
+function getButtons_assoc(content){
+	var buttons = $(content).find("button");
+	var buttons_assoc = {};
+	for(var i=0; i<buttons.length; i++){
+		buttons_assoc[$(buttons[i]).val()] = buttons[i];
+	}
+	return buttons_assoc;
+}
+
 
 
 $(document).ready(function(){
@@ -145,7 +181,6 @@ $(document).ready(function(){
 	});
 	
 	$(".table").on("dblclick",function(){
-		var buttons = $(this).parent().find("button");
 		var table = findChild(this.children,"tbody");
 		var form = null;
 		var selectedColor = "rgb(205,205,205)";
@@ -155,19 +190,19 @@ $(document).ready(function(){
 		var colNames = null;
 		var rowValues = null;
 		var rowDeselected = null;
-		var buttons_assoc = {};
-		for(var i=0; i<buttons.length; i++){
-			buttons_assoc[buttons[i].innerHTML] = buttons[i];
-		}
+		var buttons_assoc = getButtons_assoc($(this).parent());
+		
 		for(var i=0; i < table.children.length; i++){
 			if (table.children[i].tagName = "TR"){
 				color = $(table.children[i]).css("background-color");
-				if(color.includes("205")){
+				if(color.includes("205")){ //:selected
 					row = table.children[i];
 					$(row).toggleClass("rowSelector");
 					rowDeselected = row;
-					buttons_assoc["edit"].disabled = true;
-					buttons_assoc["delete"].disabled = true;
+					//the following are enveloped in try/catch blocks incase a button is not used
+					try{buttons_assoc["edit"].disabled = true;}catch(err){}
+					try{buttons_assoc["delete"].disabled = true;}catch(err){}
+					try{buttons_assoc["checkedIn"].disabled = true;}catch(err){}
 					break;
 				}
 			}
@@ -175,7 +210,7 @@ $(document).ready(function(){
 		for(var i=0; i < table.children.length; i++){
 			if (table.children[i].tagName = "TR"){
 				color = $(table.children[i]).css("background-color");
-				if(color.includes("245")){
+				if(color.includes("245")){//:hovered over
 					row = table.children[i];
 					if (rowDeselected == row) break;
 					$(row).toggleClass("rowSelector");
@@ -183,8 +218,10 @@ $(document).ready(function(){
 					rowValues = $(row).children();
 					form = findChild($(this).parent().children(),"form");
 					updateForm($(form).attr("id"), getFormAssoc(form), getRecordAssoc(colNames,rowValues));
-					buttons_assoc["edit"].disabled = false;
-					buttons_assoc["delete"].disabled = false;
+					//the following are enveloped in try/catch blocks incase a button is not used
+					try{buttons_assoc["edit"].disabled = false;}catch(err){}
+					try{buttons_assoc["delete"].disabled = false;}catch(err){}
+					try{buttons_assoc["checkedIn"].disabled = false;}catch(err){}
 					break;
 				}
 			}
@@ -197,22 +234,27 @@ $(document).ready(function(){
 		var form = findChild($(content).children(),"form");
 		$(table).hide();
 		$(form).show();	
-		var buttons = $(content).find("button");
-		var buttons_assoc = {};
-		for(var i=0; i<buttons.length; i++){
-			buttons_assoc[buttons[i].innerHTML] = buttons[i];
-		}
-		$(buttons_assoc["cancel"]).parent().show();
-		$(buttons_assoc["edit"]).parent().hide();
-		$(buttons_assoc["add"]).parent().hide();
-		$(buttons_assoc["delete"]).parent().hide();
+		var buttons_assoc = getButtons_assoc(content);
+		//the following are enveloped in try/catch blocks incase a button is not used
+		try{$(buttons_assoc["cancel"]).parent().show();}catch(err){}
+		try{$(buttons_assoc["edit"]).parent().hide();}catch(err){}
+		try{$(buttons_assoc["checkedIn"]).parent().hide();}catch(err){}
+		try{$(buttons_assoc["add"]).parent().hide();}catch(err){}
+		try{$(buttons_assoc["delete"]).parent().hide();}catch(err){}
 		if ($(this).val() == "add"){
-			resetForm($(form).find("input,select"));
+			resetForm($(form).attr("id"), $(form).find("input,select"));
 		}
 	});
 	
 	$("button[value='cancel']").on("click", function(){
 		var content = $(this).parent().parent().parent().parent().parent();
+		displayView(content);
+	});
+	
+	$("button[value='checkedIn']").on("click", function(){
+		var content = $(this).parent().parent().parent().parent().parent();
+		var form = findChild($(content).children(),"form");
+		processForm(form);
 		displayView(content);
 	});
 	
@@ -234,16 +276,7 @@ $(document).ready(function(){
 	
 	$("form").on("submit",function(){
 		event.preventDefault();
-		var inputs = $(this).find("input");
-		var submitType = null;
-		for(var i=0; i<inputs.length; i++){
-			if($(inputs[i]).attr("name") == "submit"){
-				submitType = inputs[i];
-			}
-			$(inputs[i]).attr("disabled",false);
-		}
-		var values = $(this).serialize();
-		forwardForm($(this).attr("id"), values, $(submitType).attr("value"));
+		processForm(this);
 		displayView($(this).parent());
 	});
 });

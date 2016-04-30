@@ -32,14 +32,16 @@ bankRoutingNo CHAR(9) NOT NULL);
 INSERT INTO Employee (fName, lName, position, salary, sex, 
 DOB, address, phoneNo, SSN, bankAcctNo, bankRoutingNo)
 VALUES 
-('John','Krugger','Doctor',100000.00,'M', '19771105','11 Short Ave',
+('John','Krugger','Doctor',100000.00,'M', '1977-11-05','11 Short Ave',
 '1234567890', '123456789', '13413354623', '123457689'),
-('Katie','Ramos','Assistant',43000.00,'F', '19911223','45 Hubbert St',
+('Katie','Ramos','Assistant',43000.00,'F', '1991-12-23','45 Hubbert St',
 '1234657890', '132456789', '15624322652', '123789456'),
-('Sarah','Moses','Nurse',30000.00,'F','1960-04-04','11480 Dixwell Ave','2034987472',
-'333445555', '47890243278', '47328978'),
+('Sarah','Moses','Nurse',30000.00,'F','1960-04-04','11480 Dixwell Ave',
+'2034987472','333445555', '47890243278', '47328978'),
 ('Ben', 'Flinestone','Office Manager', 90000.00, 'M', '1976-04-02', 
-'78923 Walley Ave', '2034986666', '777889999', '72843904398', '23798432');
+'78923 Walley Ave', '2034986666', '777889999', '72843904398', '23798432'),
+('Jessie','Smith','Doctor',100000.00,'F', '1983-04-10','11 Long Ave',
+'1236547890', '123458769', '13413365423', '125437689');
 
 
 DROP TABLE IF EXISTS Account;
@@ -99,26 +101,26 @@ FOREIGN KEY (patientID) REFERENCES Patient (patientID));
 
 INSERT INTO Immunization (patientID, date, type)
 VALUES 
-(1,'20020515','measles'),
-(2,'19990722','varicella');
+(1,'2002-05-15','measles'),
+(2,'1999-07-22','varicella');
 
 DROP TABLE IF EXISTS Appointment;
 CREATE TABLE IF NOT EXISTS Appointment(
 dateTime DATETIME NOT NULL,
 patientID INT UNSIGNED NOT NULL,
 employeeID INT UNSIGNED NOT NULL,
-checkedIn CHAR(1) NOT NULL,
+checkedIn CHAR(1) NOT NULL DEFAULT 'N',
 PRIMARY KEY (dateTime, patientID),
 FOREIGN KEY (patientID) REFERENCES Patient (patientID),
 FOREIGN KEY (employeeID) REFERENCES Employee (employeeID));
 
 INSERT INTO Appointment (datetime, patientID, employeeID, checkedIn)
 VALUES 
-(CURTIME(),1,1,'Y'),
-(DATE_ADD(CURTIME(),INTERVAL 3 HOUR),2,1,'Y'),
-('2016-04-25 12:22:00', 2, 5, 'N'),
-('2016-04-25 14:37:59', 1, 1, 'Y'),
-('2016-04-25 17:37:59', 2, 1, 'Y');
+('2016-04-25 12:30', 1, 1, 'Y'),
+('2016-04-25 17:00', 2, 1, 'Y'),
+('2016-04-25 14:30', 2, 5, 'N'),
+('2016-04-23 14:30', 1, 1, 'Y'),
+('2016-04-24 17:30', 2, 1, 'Y');
 
 DROP TABLE IF EXISTS Visitation;
 CREATE TABLE IF NOT EXISTS Visitation(
