@@ -9,6 +9,18 @@ if (strpos(strtolower($_POST["type"]),"employee") != false){
 else if (strpos(strtolower($_POST["type"]),"service") != false){
 	$table = "service";
 }
+else if (strpos(strtolower($_POST["type"]),"patient") != false){
+	$table = "patient";
+}
+else if (strpos(strtolower($_POST["type"]),"appointment") != false){
+	$table = "appointment";
+}
+else if (strpos(strtolower($_POST["type"]),"bill") != false){
+	$table = "bill";
+}
+else if (strpos(strtolower($_POST["type"]),"claim") != false){
+	$table = "claim";
+}
 //add table connections here
 
 
