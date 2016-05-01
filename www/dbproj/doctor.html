@@ -51,7 +51,7 @@
 			<span class="caret"></span></a>
 				<ul class="dropdown-menu">
 				<li><a data-toggle="tab" href="#ViewEmployeeSchedule">View Schedule</a></li>
-				<li><a data-toggle="tab" href="#ViewEmployeeAppt">View Appointments</a></li>
+				<li><a data-toggle="tab" href="#ViewAppointment">View Appointments</a></li>
 				</ul>
 			</li>
 		</div>
@@ -672,13 +672,155 @@
 
 
 <!-- _______________________________________________________________________________________-->				
-				<div id="ViewEmployeeSchedule" class="tab-pane fade">
-					<p> View Weekly Schedule  
-					</p>
+				<div id="ViewSchedule" class="tab-pane fade">
+					<div class="row" style="margin-bottom:10px">
+						<div class="col-md-2"></div>
+						<div class="col-md-8">
+							<div class="btn-group btn-group-justified">
+								<div class="btn-group">
+								<button class="btn btn-primary" value="add">add</button></div>
+								<div class="btn-group">
+								<button class="btn btn-danger" value="cancel">cancel</button></div>
+								<div class="btn-group">
+								<button class="btn btn-primary" value="edit">edit</button></div>
+								<div class="btn-group">
+								<button class="btn btn-danger" value="delete">delete</button></div>
+							</div>
+						</div>
+						<div class="col-md-2"></div>
+					</div>
+					<table class="table">
+						<thead>
+							<tr>
+								<th>column1</th>
+							</tr>
+						</thead>
+					</table>
+					<form role="form" id="scheduleForm" autocomplete="off">
+					<input type="text" name="employeeID" style="display:none">
+					<div class="row">
+						<div class="col-md-4"></div>
+						<div class="col-md-2">
+							<div class="form-group">
+								<label>Employee ID :
+								<input type="text" class="form-control" name="employeeID" required>
+								</label>
+							</div>
+						</div>
+						<div class="col-md-4"></div>
+					</div>
+					<div class="row">
+						<div class="col-md-4"></div>
+						<div class="col-md-2">
+							<div class="form-group">
+								<label>Work Days:
+								<input type="text" class="form-control" name="workDays" required>
+								</label>
+							</div>
+						</div>							
+					</div>
+					<div class="row">
+						<div class="col-md-4"></div>
+						<div class="col-md-2">
+							<div class="form-group">
+								<label>Start Time:
+								<input type="time" class="form-control" name="startTime" required>
+								</label>
+							</div>
+						</div>							
+					</div>
+					<div class="row">
+						<div class="col-md-4"></div>
+						<div class="col-md-2">
+							<div class="form-group">
+								<label>End Time: 
+								<input type="time" class="form-control" name="endTime" required>
+								</label>
+							</div>
+						</div>
+						<div class="col-md-4"></div>
+					</div>
+					<div class="row">
+						<div class="col-md-4"></div>
+						<div class="col-md-4">
+							<div class="form-group">
+							<input type="submit" class="form-control btn-primary" name="submit" value="submit">
+							</div>
+						</div>
+						<div class="col-md-4"></div>
+					</div>
+					</form>
 				</div>
-				<div id="ViewEmployeeAppt" class="tab-pane fade">
-					<p> View Daily Patient Schedule   
-					</p>
+
+				<div id="ViewAppointment" class="tab-pane fade">
+					<div class="row" style="margin-bottom:10px">
+						<div class="col-md-2"></div>
+						<div class="col-md-8">
+							<div class="btn-group btn-group-justified">
+								<div class="btn-group">
+								<button class="btn btn-primary" value="add">add</button></div>
+								<div class="btn-group">
+								<button class="btn btn-danger" value="cancel">cancel</button></div>
+								<div class="btn-group">
+								<button class="btn btn-primary" value="checkedIn">checked-in</button></div>
+								<div class="btn-group">
+								<button class="btn btn-danger" value="delete">delete</button></div>
+							</div>
+						</div>
+						<div class="col-md-2"></div>
+					</div>
+					<table class="table">
+						<thead>
+							<tr>
+								<th>column1</th>
+							</tr>
+						</thead>
+					</table>
+					<form role="form" id="appointmentForm" autocomplete="off">
+					<input type="text" name="checkedIn" style="display:none">
+					<div class="row">
+						<div class="col-md-4"></div>
+						<div class="col-md-4">
+							<div class="form-group">
+								<label>date:
+								<input type="datetime-local" class="form-control" name="date" required>
+								</label>
+							</div>
+						</div>
+						<div class="col-md-4"></div>
+					</div>
+					<div class="row">
+						<div class="col-md-4"></div>
+						<div class="col-md-2">
+							<div class="form-group">
+								<label>patient:
+								<select class="form-control" name="patient" required>
+									<option>add patients through javascript, value of each option is the corresponding patientID</option>
+								</select>
+								</label>
+							</div>
+						</div>
+						<div class="col-md-2">
+							<div class="form-group">
+								<label>doctor:
+								<select class="form-control" name="doctor" required>
+									<option>add doctor through javascript, value of each option is the corresponding employeeID</option>
+								</select>
+								</label>
+							</div>
+						</div>
+						<div class="col-md-4"></div>
+					</div>
+					<div class="row">
+						<div class="col-md-4"></div>
+						<div class="col-md-4">
+							<div class="form-group">
+							<input type="submit" class="form-control btn-primary" name="submit" value="submit">
+							</div>
+						</div>
+						<div class="col-md-4"></div>
+					</div>
+					</form>
 				</div>
 
 

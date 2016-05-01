@@ -30,6 +30,9 @@ else if (strpos(strtolower($_POST["type"]),"medicaltest") != false){
 else if (strpos(strtolower($_POST["type"]),"visitation") != false){
 	$sql = "SELECT * FROM visitation";
 }
+else if (strpos(strtolower($_POST["type"]),"schedule") != false){
+	$sql = "SELECT * FROM schedule";
+}
 else if (strpos(strtolower($_POST["type"]),"bill") != false){
 	$sql = "SELECT * FROM bill";
 }

@@ -70,6 +70,12 @@ function updateForm(fid, inputs_assoc, values_assoc){
 		$(inputs_assoc["diagnosis"]).val(values_assoc["diagnosis"]);
 		$(inputs_assoc["serviceType"]).val(values_assoc["serviceType"]);
 	}
+	else if(fid == "scheduleForm"){
+		$(inputs_assoc["employeeID"]).val(values_assoc["employeeID"]);
+		$(inputs_assoc["workDays"]).val(values_assoc["workDays"]);
+		$(inputs_assoc["startTime"]).val(values_assoc["startTime"]);
+		$(inputs_assoc["endTime"]).val(values_assoc["endTime"]);
+	}
 	else if(fid == "appointmentForm"){
 		$(inputs_assoc["date"]).val(values_assoc["date"].replace(" ","T"));
 		$.get("getPatientOptions.php", function(data, status){
