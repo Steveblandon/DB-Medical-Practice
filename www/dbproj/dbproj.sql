@@ -128,7 +128,7 @@ INSERT INTO Appointment (datetime, patientID, employeeID, checkedIn)
 VALUES 
 (CURTIME(),1,1,'Y'),
 (DATE_ADD(CURTIME(),INTERVAL 3 HOUR),2,1,'Y'),
-('2016-04-25 12:22:00', 2, 5, 'N'),
+('2016-04-25 12:22:00', 2, 3, 'N'),
 ('2016-04-25 14:37:59', 1, 1, 'Y'),
 ('2016-04-25 17:37:59', 2, 1, 'Y');
 
