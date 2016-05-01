@@ -1,26 +1,30 @@
-<html> 
-<body> 
 <?php 
-
 require "dbConnect.php";
 
 $username = $_POST["username"];
-$password = $_POST["password"]; 
 
-echo "Value1: ".$username;
-echo "<br>Value2: ". $password; 
+$sql = "SELECT position FROM employee WHERE employeeID = (SELECT employeeID FROM account WHERE username = '$username');"; 
 
-$sql = "SELECT * FROM account WHERE username='$username' and password='$password' "; 
 $result = $conn->query($sql);
-if($result -> num_rows > 0 ){
-	echo "<br> Done";
+if (!$result){
+	die("query failed" . $conn->error);
 }
-else {
-	echo "<br>not";
+$entry = $result->fetch_row();
+$entry = $entry[0];
+switch($entry){
+	case "Nurse":
+		echo "Location:nurse.html";
+		break;
+	case "Doctor":
+		echo "Location:doctor.html";
+		break;
+	case "Assistant":
+		echo "Location:assistant.html";
+		break;
+	case "Office Manager":
+		echo "Location:officeManager.html";
+		break;
+	default:
+		echo "You've entered an incorrect username or password!";
 }
-
-
-
 ?> 
-</body>
-</html> 

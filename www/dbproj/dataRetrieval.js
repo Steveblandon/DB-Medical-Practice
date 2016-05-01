@@ -279,5 +279,9 @@ $(document).ready(function(){
 		processForm(this);
 		displayView($(this).parent());
 	});
+	
+	$("button[value='logout']").on("click", function(){
+		window.location.replace("index.php");
+	});
 });
 
