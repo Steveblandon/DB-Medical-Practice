@@ -18,6 +18,15 @@ else if (strpos(strtolower($_POST["type"]),"appointment") != false){
 	FROM appointment a, patient p, employee e
 	WHERE a.patientID = p.patientID AND a.employeeID = e.employeeID";
 }
+else if (strpos(strtolower($_POST["type"]),"healthscreening") != false){
+	$sql = "SELECT * FROM healthscreening";
+}
+else if (strpos(strtolower($_POST["type"]),"immunization") != false){
+	$sql = "SELECT * FROM immunization";
+}
+else if (strpos(strtolower($_POST["type"]),"medicaltest") != false){
+	$sql = "SELECT * FROM medicaltest";
+}
 else if (strpos(strtolower($_POST["type"]),"bill") != false){
 	$sql = "SELECT * FROM bill";
 }

@@ -39,6 +39,30 @@ function updateForm(fid, inputs_assoc, values_assoc){
 		$(inputs_assoc["insuranceNo"]).val(values_assoc["insuranceNo"]);
 		$(inputs_assoc["insurancePrimary"]).val(values_assoc["insurancePrimary"]);
 	}
+	else if(fid == "healthScreeningForm"){
+		$(inputs_assoc["date"]).val(values_assoc["date"].replace(" ","T"));
+		$(inputs_assoc["patientID"]).val(values_assoc["patientID"]);
+		if(values_assoc["smoker"] != "") $('input[value='+values_assoc["smoker"]+']', '#healthScreeningForm').val([values_assoc["smoker"]]);
+		if(values_assoc["pregnant"] != "") $('input[value='+values_assoc["pregnant"]+']', '#healthScreeningForm').val([values_assoc["pregnant"]]);
+		$(inputs_assoc["height"]).val(values_assoc["height"]);
+		$(inputs_assoc["weight"]).val(values_assoc["weight"]);
+		$(inputs_assoc["bloodPressure"]).val(values_assoc["bloodPressure"]);
+		$(inputs_assoc["HR"]).val(values_assoc["HR"]);
+		$(inputs_assoc["currentMedications"]).val(values_assoc["currentMedications"]);
+	}
+	else if(fid == "immunizationForm"){
+		$(inputs_assoc["patientID"]).val(values_assoc["patientID"]);
+		$(inputs_assoc["date"]).val(values_assoc["date"]);
+		$(inputs_assoc["type"]).val(values_assoc["type"]);
+	}
+	else if(fid == "medicaltestForm"){
+		$(inputs_assoc["date"]).val(values_assoc["date"]);
+		$(inputs_assoc["type"]).val(values_assoc["type"]);
+		$(inputs_assoc["patientID"]).val(values_assoc["patientID"]);
+		$(inputs_assoc["testLocation"]).val(values_assoc["testLocation"]);
+		$(inputs_assoc["aDate"]).val(values_assoc["aDate"]);
+		$(inputs_assoc["result"]).val(values_assoc["result"]);
+	}
 	else if(fid == "appointmentForm"){
 		$(inputs_assoc["date"]).val(values_assoc["date"].replace(" ","T"));
 		$.get("getPatientOptions.php", function(data, status){
