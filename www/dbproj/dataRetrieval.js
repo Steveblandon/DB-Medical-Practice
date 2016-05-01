@@ -27,6 +27,18 @@ function updateForm(fid, inputs_assoc, values_assoc){
 		$(inputs_assoc["type"]).attr("disabled",true);
 		$(inputs_assoc["cost"]).val(values_assoc["cost"]);
 	}
+	else if(fid == "patientForm"){
+		$(inputs_assoc["patientID"]).val(values_assoc["patientID"]);
+		$(inputs_assoc["fName"]).val(values_assoc["fName"]);
+		$(inputs_assoc["lName"]).val(values_assoc["lName"]);
+		$(inputs_assoc["date"]).val(values_assoc["DOB"]);
+		if(values_assoc["sex"] != "") $('input[value='+values_assoc["sex"]+']', '#patientForm').val([values_assoc["sex"]]);
+		$(inputs_assoc["address"]).val(values_assoc["address"]);
+		$(inputs_assoc["phoneNo"]).val(values_assoc["phoneNo"]);
+		$(inputs_assoc["insuranceProvider"]).val(values_assoc["insuranceProvider"]);
+		$(inputs_assoc["insuranceNo"]).val(values_assoc["insuranceNo"]);
+		$(inputs_assoc["insurancePrimary"]).val(values_assoc["insurancePrimary"]);
+	}
 	else if(fid == "appointmentForm"){
 		$(inputs_assoc["date"]).val(values_assoc["date"].replace(" ","T"));
 		$.get("getPatientOptions.php", function(data, status){
