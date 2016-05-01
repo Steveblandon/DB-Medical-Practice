@@ -31,7 +31,7 @@
 	<div class="row">
 		<div class="col-md-9"></div>
 		<div class="col-md-3">
-			<button class="btn btn-default" style="margin-top:5px;">log out</button>
+			<button class="btn btn-default" style="margin-top:5px;" value="logout">log out</button>
 		</div>
 	</div>
 	<div class="row">
@@ -57,14 +57,129 @@
 		</div>
 		
 		<div id="ViewPatient" class="tab-pane fade">
-			<p class="text-center"> view patient </p>
-			<table class="table table-hover">
+			<div class="row" style="margin-bottom:10px">
+				<div class="col-md-2"></div>
+				<div class="col-md-8">
+					<div class="btn-group btn-group-justified">
+						<div class="btn-group">
+						<button class="btn btn-primary" value="add">add</button></div>
+						<div class="btn-group">
+						<button class="btn btn-danger" value="cancel">cancel</button></div>
+						<div class="btn-group">
+						<button class="btn btn-primary" value="edit">edit</button></div>
+						<div class="btn-group">
+						<button class="btn btn-danger" value="delete">delete</button></div>
+					</div>
+				</div>
+				<div class="col-md-2"></div>
+			</div>
+			<table class="table">
 				<thead>
 					<tr>
 						<th>column1</th>
 					</tr>
 				</thead>
 			</table>
+			<form role="form" id="patientForm" autocomplete="off">
+			<input type="text" name="patientID" style="display:none">
+			<div class="row">
+				<div class="col-md-4"></div>
+				<div class="col-md-2">
+					<div class="form-group">
+						<label>First Name:
+						<input type="text" class="form-control" name="fName" maxlength="20" required>
+						</label>
+					</div>
+				</div>
+				<div class="col-md-2">
+					<div class="form-group">
+						<label>Last Name:
+						<input type="text" class="form-control" name="lName" maxlength="20" required>
+						</label>
+					</div>
+				</div>
+				<div class="col-md-4"></div>
+			</div>
+			<div class="row">
+				<div class="col-md-4"></div>
+				<div class="col-md-2">
+					<div class="form-group">
+						<label>Date of Birth:
+						<input type="date" class="form-control" name="date" required>
+						</label>
+					</div>
+				</div>
+				<div class="col-md-2">
+					<div class="form-group">
+						<label>Gender:<br>
+						<label class="radio-inline">
+						<input type="radio" name="sex" value="M" required>M
+						</label>
+						<label class="radio-inline">
+						<input type="radio" name="sex" value="F" required>F
+						</label>
+						</label>
+					</div>
+				</div>
+				<div class="col-md-4"></div>
+			</div>
+			<div class="row">
+				<div class="col-md-4"></div>
+				<div class="col-md-2">
+					<div class="form-group">
+						<label>Address:
+						<input type="text" class="form-control" name="address" maxlength="30" required>
+						</label>
+					</div>
+				</div>
+				<div class="col-md-2">
+					<div class="form-group">
+						<label>Phone Number:
+						<input type="text" class="form-control" name="phoneNo" maxlength="10" required>
+						</label>
+					</div>
+				</div>
+				<div class="col-md-4"></div>
+			</div>
+			<div class="row">
+				<div class="col-md-4"></div>
+				<div class="col-md-4">
+					<div class="form-group">
+						<label>Insurance Provider:
+						<input type="text" class="form-control" name="insuranceProvider" maxlength="9" size="100%" required>
+						</label>
+					</div>
+				</div>
+				<div class="col-md-4"></div>
+			</div>
+			<div class="row">
+				<div class="col-md-4"></div>
+				<div class="col-md-2">
+					<div class="form-group">
+						<label>Insurance Number:
+						<input type="text" class="form-control" name="insuranceNo" maxlength="10" required>
+						</label>
+					</div>
+				</div>
+				<div class="col-md-2">
+					<div class="form-group">
+						<label>Insurance Primary:
+						<input type="text" class="form-control" name="insurancePrimary" maxlength="30" required>
+						</label>
+					</div>
+				</div>
+				<div class="col-md-4"></div>
+			</div>
+			<div class="row">
+				<div class="col-md-4"></div>
+				<div class="col-md-4">
+					<div class="form-group">
+					<input type="submit" class="form-control btn-primary" name="submit" value="submit">
+					</div>
+				</div>
+				<div class="col-md-4"></div>
+			</div>
+			</form>
 		</div>
 		
 		<div id="ViewAppointment" class="tab-pane fade">
