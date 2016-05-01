@@ -63,6 +63,13 @@ function updateForm(fid, inputs_assoc, values_assoc){
 		$(inputs_assoc["aDate"]).val(values_assoc["aDate"]);
 		$(inputs_assoc["result"]).val(values_assoc["result"]);
 	}
+	else if(fid == "visitationForm"){
+		$(inputs_assoc["date"]).val(values_assoc["date"].replace(" ","T"));
+		$(inputs_assoc["patientID"]).val(values_assoc["patientID"]);
+		$(inputs_assoc["reasonForVisit"]).val(values_assoc["reasonForVisit"]);
+		$(inputs_assoc["diagnosis"]).val(values_assoc["diagnosis"]);
+		$(inputs_assoc["serviceType"]).val(values_assoc["serviceType"]);
+	}
 	else if(fid == "appointmentForm"){
 		$(inputs_assoc["date"]).val(values_assoc["date"].replace(" ","T"));
 		$.get("getPatientOptions.php", function(data, status){

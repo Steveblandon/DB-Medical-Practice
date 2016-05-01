@@ -43,7 +43,7 @@
 				<li><a data-toggle="tab" href="#ViewHealthScreening">Health Screening</a></li>
 				<li><a data-toggle="tab" href="#ViewImmunization">Immunization</a></li>
 				<li><a data-toggle="tab" href="#ViewMedicalTest">Medical Tests</a></li>
-				<li><a data-toggle="tab" href="#ViewPatientVisit">Visit</a></li>
+				<li><a data-toggle="tab" href="#ViewVisitation">Visit</a></li>
 				</ul>
 			</li>
 			<li class="dropdown">
@@ -571,12 +571,101 @@
 					</form>
 				</div>
 
-				<div id="?????" class="tab-pane fade">
-				View Medical Test Table 
-				</div>
-
-				<div id="ViewPatientVisit" class="tab-pane fade">
-				View Visit Test Table 
+				<div id="ViewVisitation" class="tab-pane fade">
+					<div class="row" style="margin-bottom:10px">
+						<div class="col-md-2"></div>
+						<div class="col-md-8">
+							<div class="btn-group btn-group-justified">
+								<div class="btn-group">
+								<button class="btn btn-primary" value="add">add</button></div>
+								<div class="btn-group">
+								<button class="btn btn-danger" value="cancel">cancel</button></div>
+								<div class="btn-group">
+								<button class="btn btn-primary" value="edit">edit</button></div>
+								<div class="btn-group">
+								<button class="btn btn-danger" value="delete">delete</button></div>
+							</div>
+						</div>
+						<div class="col-md-2"></div>
+					</div>
+					<table class="table">
+						<thead>
+							<tr>
+								<th>column1</th>
+							</tr>
+						</thead>
+					</table>
+					<form role="form" id="visitationForm" autocomplete="off">
+					<input type="text" name="patientID" style="display:none">
+					<div class="row">
+						<div class="col-md-4"></div>
+						<div class="col-md-4">
+							<div class="form-group">
+								<label>Date:
+								<input type="datetime-local" class="form-control" name="date" required>
+								</label>
+							</div>
+						</div>
+						<div class="col-md-4"></div>
+					</div>
+					<div class="row">
+						<div class="col-md-4"></div>
+						<div class="col-md-4">
+							<div class="form-group">
+								<label>Patient ID:
+								<input type="text" class="form-control" name="patientID" required>
+								</label>
+							</div>
+						</div>							
+					</div>
+					<div class="row">
+						<div class="col-md-4"></div>
+						<div class="col-md-4">
+							<div class="form-group">
+								<label>Reason For Visit:
+								<input type="text" class="form-control" name="reasonForVisit" maxlength="50" required>
+								</label>
+							</div>
+						</div>
+						<div class="col-md-4"></div>
+					</div>
+					<div class="row">
+						<div class="col-md-4"></div>
+						<div class="col-md-4">
+							<div class="form-group">
+								<label>Diagnosis
+								<input type="text" class="form-control" name="dia"  maxlength = "50" required>
+								</label>
+							</div>
+						</div>
+						<div class="col-md-4"></div>
+					</div>
+					<div class="row">
+						<div class="col-md-4"></div>
+						<div class="col-md-4">
+							<div class="form-group">
+								<label>Service Type:<br>
+								<label class="radio-inline">
+								<input type="radio" name="serviceType" value="General" required>General
+								</label>
+								<label class="radio-inline">
+								<input type="radio" name="serviceType" value="Physical" required>Physical
+								</label>
+								</label>
+							</div>
+						</div>
+						<div class="col-md-4"></div>
+					</div>
+					<div class="row">
+						<div class="col-md-4"></div>
+						<div class="col-md-4">
+							<div class="form-group">
+							<input type="submit" class="form-control btn-primary" name="submit" value="submit">
+							</div>
+						</div>
+						<div class="col-md-4"></div>
+					</div>
+					</form>
 				</div>
 
 				
