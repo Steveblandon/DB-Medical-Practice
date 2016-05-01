@@ -3,8 +3,19 @@
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	<script src="bootbox.min.js"></script>
 	<script src="dataRetrieval.js"></script>
-</head>
+	<style>
+		.rowSelector {
+			background-color:rgb(205,205,205);
+		}
+		tbody tr:hover {
+			background-color:rgb(245,245,245);
+		}
+		tr.rowSelector:hover {
+			background-color:rgb(205,205,205);
+		}
+	</style>
 <body> 
 
 
@@ -21,16 +32,7 @@
 		<div class="col-md-8">
 		<ul class="nav nav-tabs">
 			<li class="active"><a data-toggle="tab" href="#Home">Home</a></li> 
-			<li class="dropdown">
-			<a class="dropdown-toggle" data-toggle="dropdown" href="#">Patients
-			<span class="caret"></span></a>
-				<ul class="dropdown-menu">
-				<li><a data-toggle="tab" href="#ViewPatient">View Patient</a></li>
-				<li><a data-toggle="tab" href="#AddPatient">Add New Patient</a></li>
-				<li><a data-toggle="tab" href="#DelPatient">Delete Patient</a></li>
-				<li><a data-toggle="tab" href="#UpdatePatient">Update Patient</a></li>
-				</ul>
-			</li>
+			<li><a data-toggle="tab" href="#ViewPatient">Patients</a></li>
 		</div>
 		<div class="col-md-2"></div>
 	</div>
@@ -38,22 +40,136 @@
 		<div class="col-md-2"></div>
 		<div class="col-md-8">
 			<div class="tab-content">
-					<div id='Home' class='tab-pane fade in active'>
+				
+				<div id='Home' class='tab-pane fade in active'>
 						  <h1 class='text-center'> Welcome! </h1>
 						  <p class='text-center'> Nurse suite </p>
+				</div>
+				<div id="ViewPatient" class="tab-pane fade">
+					<div class="row" style="margin-bottom:10px">
+						<div class="col-md-2"></div>
+						<div class="col-md-8">
+							<div class="btn-group btn-group-justified">
+								<div class="btn-group">
+								<button class="btn btn-primary" value="add">add</button></div>
+								<div class="btn-group">
+								<button class="btn btn-danger" value="cancel">cancel</button></div>
+								<div class="btn-group">
+								<button class="btn btn-primary" value="edit">edit</button></div>
+								<div class="btn-group">
+								<button class="btn btn-danger" value="delete">delete</button></div>
+							</div>
+						</div>
+						<div class="col-md-2"></div>
 					</div>
-					<div id='ViewPatient' class='tab-pane fade'>
-					<p class="text-center"> View Employee </p>					
+					<table class="table">
+						<thead>
+							<tr>
+								<th>column1</th>
+							</tr>
+						</thead>
+					</table>
+					<form role="form" id="patientForm" autocomplete="off">
+					<input type="text" name="patientID" style="display:none">
+					<div class="row">
+						<div class="col-md-4"></div>
+						<div class="col-md-2">
+							<div class="form-group">
+								<label>First Name:
+								<input type="text" class="form-control" name="fName" required>
+								</label>
+							</div>
+						</div>
+						<div class="col-md-2">
+							<div class="form-group">
+								<label>Last Name:
+								<input type="text" class="form-control" name="lName" required>
+								</label>
+							</div>
+						</div>
+						<div class="col-md-4"></div>
 					</div>
-					<div id='AddPatient' class='tab-pane fade'>
-					Add Patient 
+					<div class="row">
+						<div class="col-md-4"></div>
+						<div class="col-md-2">
+							<div class="form-group">
+								<label>Date of Birth:
+								<input type="date" class="form-control" name="date" required>
+								</label>
+							</div>
+						</div>
+						<div class="col-md-2">
+							<div class="form-group">
+								<label>Gender:<br>
+								<label class="radio-inline">
+								<input type="radio" name="sex" value="M" required>M
+								</label>
+								<label class="radio-inline">
+								<input type="radio" name="sex" value="F" required>F
+								</label>
+								</label>
+							</div>
+						</div>
+						<div class="col-md-4"></div>
 					</div>
-					<div id='DelPatient' class='tab-pane fade'>
-					Delete Patient 
+					<div class="row">
+						<div class="col-md-4"></div>
+						<div class="col-md-2">
+							<div class="form-group">
+								<label>Address:
+								<input type="text" class="form-control" name="address" required>
+								</label>
+							</div>
+						</div>
+						<div class="col-md-2">
+							<div class="form-group">
+								<label>Phone Number:
+								<input type="text" class="form-control" name="phoneNo" maxlength="10" required>
+								</label>
+							</div>
+						</div>
+						<div class="col-md-4"></div>
 					</div>
-					<div id='UpdatePatient' class='tab-pane fade'>
-					Update Patient 
+					<div class="row">
+						<div class="col-md-4"></div>
+						<div class="col-md-4">
+							<div class="form-group">
+								<label>insuranceProvider:
+								<input type="text" class="form-control" name="insuranceProvider" maxlength="9" size="100%" required>
+								</label>
+							</div>
+						</div>
+						<div class="col-md-4"></div>
 					</div>
+					<div class="row">
+						<div class="col-md-4"></div>
+						<div class="col-md-2">
+							<div class="form-group">
+								<label>Insruance Number:
+								<input type="text" class="form-control" name="insuranceNo" maxlength="17" required>
+								</label>
+							</div>
+						</div>
+						<div class="col-md-2">
+							<div class="form-group">
+								<label>Insurance Primary:
+								<input type="text" class="form-control" name="insurancePrimary" maxlength="9" required>
+								</label>
+							</div>
+						</div>
+						<div class="col-md-4"></div>
+					</div>
+					<div class="row">
+						<div class="col-md-4"></div>
+						<div class="col-md-4">
+							<div class="form-group">
+							<input type="submit" class="form-control btn-primary" name="submit" value="submit">
+							</div>
+						</div>
+						<div class="col-md-4"></div>
+					</div>
+					</form>
+				</div>
 			</div>
 		</div>
 		<div class="col-md-2"></div>
@@ -61,16 +177,5 @@
 	
 </div>
 <navbar>
-<?php 
-
-
-
-
-
-
-
-
-
-?> 
 </body>
-<html> 
+</html> 
