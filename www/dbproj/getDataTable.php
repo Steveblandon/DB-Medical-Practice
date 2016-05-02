@@ -43,14 +43,20 @@ else if (strpos(strtolower($_POST["type"]),"bill") != false){
 else if (strpos(strtolower($_POST["type"]),"claim") != false){
 	$sql = "SELECT * FROM claim";
 }
+// else if (strpos(strtolower($_POST["type"]),"_om") != false){
+	// $userID = $_SESSION["userID"];
+	// $sql = "SELECT workDays, DATE_FORMAT(startTime,'%H:%m') AS startTime, DATE_FORMAT(endTime,'%H:%m') AS endTime 
+	// FROM schedule
+	// WHERE employeeID = '$userID'";
+// }
 //add table connections here
-
 
 
 $result = $conn->query($sql);
 if (!$result){
 	die("query failed" . $conn->error);
 }
+
 
 echo "<thead><tr>";
 while($field = $result->fetch_field()){
@@ -61,6 +67,7 @@ echo "<tbody>";
 while($row = $result->fetch_row()){
 	$i = 0;
 	$max = count($row);
+	if ($max == 0) echo "nothing";
 	echo "<tr>";
 	while($i < $max){
 		echo "<td>" . $row[$i] . "</td>";

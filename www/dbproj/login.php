@@ -3,7 +3,7 @@ require "dbConnect.php";
 
 $username = $_POST["username"];
 
-$sql = "SELECT position, fName, lName FROM employee WHERE employeeID = (SELECT employeeID FROM account WHERE username = '$username');"; 
+$sql = "SELECT position, fName, lName, employeeID FROM employee WHERE employeeID = (SELECT employeeID FROM account WHERE username = '$username');"; 
 
 $result = $conn->query($sql);
 if (!$result){
@@ -12,6 +12,7 @@ if (!$result){
 $entry = $result->fetch_row();
 $position = $entry[0];
 $_SESSION["user"] = $entry[1] . " " . $entry[2];
+$_SESSION["userID"] = $entry[3];
 
 switch($position){
 	case "Nurse":
