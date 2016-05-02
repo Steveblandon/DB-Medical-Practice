@@ -71,7 +71,11 @@ function updateForm(fid, inputs_assoc, values_assoc){
 		$(inputs_assoc["serviceType"]).val(values_assoc["serviceType"]);
 	}
 	else if(fid == "scheduleForm"){
-		$(inputs_assoc["employeeID"]).val(values_assoc["employeeID"]);
+		$.get("getEmployeeOptions.php", function(data, status){
+			$(inputs_assoc["employeeID"]).html(data);
+			$(inputs_assoc["employeeID"]).val(values_assoc["employeeID"]);
+		});
+		$(inputs_assoc["employeeID"]).attr("disabled",true);
 		$(inputs_assoc["workDays"]).val(values_assoc["workDays"]);
 		$(inputs_assoc["startTime"]).val(values_assoc["startTime"]);
 		$(inputs_assoc["endTime"]).val(values_assoc["endTime"]);
@@ -135,6 +139,13 @@ function resetForm(fid, inputs){
 		});
 		$.get("getDoctorOptions.php", function(data, status){
 			var input = $("select[name='doctor']","#"+fid);
+			$(input).html(data);
+			$(input).val("");
+		});
+	}
+	else if(fid == "scheduleForm"){
+		$.get("getEmployeeOptions.php", function(data, status){
+			var input = $("select[name='employeeID']","#"+fid);
 			$(input).html(data);
 			$(input).val("");
 		});

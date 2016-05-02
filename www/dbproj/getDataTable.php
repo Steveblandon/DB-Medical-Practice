@@ -32,7 +32,10 @@ else if (strpos(strtolower($_POST["type"]),"visitation") != false){
 	$sql = "SELECT * FROM visitation";
 }
 else if (strpos(strtolower($_POST["type"]),"schedule") != false){
-	$sql = "SELECT * FROM schedule";
+	$sql = "SELECT s.employeeID, e.fName, e.lName, s.workDays, 
+	DATE_FORMAT(s.startTime,'%H:%m') AS startTime, DATE_FORMAT(s.endTime,'%H:%m') AS endTime 
+	FROM schedule s, employee e
+	WHERE s.employeeID = e.employeeID";
 }
 else if (strpos(strtolower($_POST["type"]),"bill") != false){
 	$sql = "SELECT * FROM bill";
