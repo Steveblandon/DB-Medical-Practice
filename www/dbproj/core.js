@@ -224,6 +224,10 @@ function getButtons_assoc(content){
 
 
 $(document).ready(function(){
+	$.get("getUser.php", function(output, status){
+		$("#userLoggedIn").html(output);
+	});
+	
 	$("a[data-toggle='tab']").on("click",function(){
 		var content = $($(this).attr("href"));
 		displayView(content);

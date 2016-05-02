@@ -3,15 +3,17 @@ require "dbConnect.php";
 
 $username = $_POST["username"];
 
-$sql = "SELECT position FROM employee WHERE employeeID = (SELECT employeeID FROM account WHERE username = '$username');"; 
+$sql = "SELECT position, fName, lName FROM employee WHERE employeeID = (SELECT employeeID FROM account WHERE username = '$username');"; 
 
 $result = $conn->query($sql);
 if (!$result){
 	die("query failed" . $conn->error);
 }
 $entry = $result->fetch_row();
-$entry = $entry[0];
-switch($entry){
+$position = $entry[0];
+$_SESSION["user"] = $entry[1] . " " . $entry[2];
+
+switch($position){
 	case "Nurse":
 		echo "Location:nurse.html";
 		break;

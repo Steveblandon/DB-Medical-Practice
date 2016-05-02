@@ -1,6 +1,7 @@
 <?php
 require "dbConnect.php";
 
+
 $sql = "";
 //add table connections here
 if (strpos(strtolower($_POST["type"]),"employee") != false){

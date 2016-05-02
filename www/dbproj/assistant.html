@@ -2,21 +2,12 @@
 <html> 
 <head>
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	<link rel="stylesheet" href="theme.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 	<script src="bootbox.min.js"></script>
-	<script src="dataRetrieval.js"></script>
-	<style>
-		.rowSelector {
-			background-color:rgb(205,205,205);
-		}
-		tbody tr:hover {
-			background-color:rgb(245,245,245);
-		}
-		tr.rowSelector:hover {
-			background-color:rgb(205,205,205);
-		}
-	</style>
+	<script src="core.js"></script>
+	
 </head>
 <body> 
 <!--ASSISTANT:
@@ -28,10 +19,13 @@
 
 <navbar>
 <div class="container">
-	<div class="row">
-		<div class="col-md-9"></div>
+	<div class="row" style="margin-top:5px;">
+		<div class="col-md-7"></div>
+		<div class="col-md-2">
+			<p id="userLoggedIn" class="text-right" style="margin-top:5px;">Steve Blandon</p>
+		</div>
 		<div class="col-md-3">
-			<button class="btn btn-default" style="margin-top:5px;" value="logout">log out</button>
+			<button class="btn btn-default">log out</button>
 		</div>
 	</div>
 	<div class="row">

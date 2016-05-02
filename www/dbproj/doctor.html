@@ -1,21 +1,11 @@
 <html> 
 <head>
 	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+	<link rel="stylesheet" href="theme.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 	<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 	<script src="bootbox.min.js"></script>
-	<script src="dataRetrieval.js"></script>
-	<style>
-		.rowSelector {
-			background-color:rgb(205,205,205);
-		}
-		tbody tr:hover {
-			background-color:rgb(245,245,245);
-		}
-		tr.rowSelector:hover {
-			background-color:rgb(205,205,205);
-		}
-	</style>
+	<script src="core.js"></script>
 </head>
 <body> 
 
@@ -23,10 +13,13 @@
 
 <navbar>
 <div class="container">
-	<div class="row">
-		<div class="col-md-9"></div>
+	<div class="row" style="margin-top:5px;">
+		<div class="col-md-7"></div>
+		<div class="col-md-2">
+			<p id="userLoggedIn" class="text-right" style="margin-top:5px;">Steve Blandon</p>
+		</div>
 		<div class="col-md-3">
-			<button class="btn btn-default" style="margin-top:5px;">log out</button>
+			<button class="btn btn-default">log out</button>
 		</div>
 	</div>
 	<div class="row">
@@ -50,20 +43,24 @@
 			<a class="dropdown-toggle" data-toggle="dropdown" href="#">Doctor
 			<span class="caret"></span></a>
 				<ul class="dropdown-menu">
-				<li><a data-toggle="tab" href="#ViewEmployeeSchedule">View Schedule</a></li>
+				<li><a data-toggle="tab" href="#ViewSchedule">View Schedule</a></li>
 				<li><a data-toggle="tab" href="#ViewAppointment">View Appointments</a></li>
 				</ul>
 			</li>
 		</div>
 		<div class="col-md-2"></div>
 	</div>
+<div>
+</navbar>
+	
+<div class="container">
 	<div class="row">
 		<div class="col-md-2"></div>
 		<div class="col-md-8">
 			<div class="tab-content">
 				<div id='Home' class='tab-pane fade in active'>
 					<h1 class='text-center'> Welcome! </h1>
-					<p class='text-center'> Nurse suite </p>
+					<p class='text-center'> Doctor suite </p>
 				</div>
 				<div id="ViewPatient" class="tab-pane fade">
 					<div class="row" style="margin-bottom:10px">
@@ -191,6 +188,7 @@
 					</form>
 				</div>
 				
+				
 				<div id="ViewAppointment" class="tab-pane fade">
 					<div class="row" style="margin-bottom:10px">
 						<div class="col-md-2"></div>
@@ -202,8 +200,6 @@
 								<button class="btn btn-danger" value="cancel">cancel</button></div>
 								<div class="btn-group">
 								<button class="btn btn-primary" value="checkedIn">checked-in</button></div>
-								<div class="btn-group">
-								<button class="btn btn-danger" value="delete">delete</button></div>
 							</div>
 						</div>
 						<div class="col-md-2"></div>
@@ -571,6 +567,8 @@
 					</form>
 				</div>
 
+				
+				
 				<div id="ViewVisitation" class="tab-pane fade">
 					<div class="row" style="margin-bottom:10px">
 						<div class="col-md-2"></div>
@@ -669,9 +667,7 @@
 				</div>
 
 				
-
-
-<!-- _______________________________________________________________________________________-->				
+				
 				<div id="ViewSchedule" class="tab-pane fade">
 					<div class="row" style="margin-bottom:10px">
 						<div class="col-md-2"></div>
@@ -822,20 +818,12 @@
 					</div>
 					</form>
 				</div>
-
-
-
-<!--   _________________________Keep These ___________________________________________________ -->
 			</div>
 		</div>
 		<div class="col-md-2"></div>
 	</div>
 	
 </div>
-<navbar>
-
-
-
 
 
 </body>
