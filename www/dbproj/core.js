@@ -52,6 +52,7 @@ function updateForm(fid, inputs_assoc, values_assoc){
 	}
 	else if(fid == "immunizationForm"){
 		$(inputs_assoc["patientID"]).val(values_assoc["patientID"]);
+		$(inputs_assoc["patientID"]).attr("disabled",true);
 		$(inputs_assoc["date"]).val(values_assoc["date"]);
 		$(inputs_assoc["type"]).val(values_assoc["type"]);
 	}
