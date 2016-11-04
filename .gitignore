@@ -1,3 +1,4 @@
+sqldb-copy/dbproj.sql
 www/wampthemes/
 www/testmysql.php
 www/test_sockets.php
@@ -6,6 +7,7 @@ www/favicon.ico
 www/add_vhost.php
 www/TestPractice/test.php
 www/Spring2016CSC335/
+www/CSC335/
 bin/apache/
 apps/
 alias/
@@ -15,6 +17,7 @@ logs/
 lang/
 bin/php/
 cgi_bin/
+bin/
 bin/mysql/mysql5.7.9/share/
 bin/mysql/mysql5.7.9/bin/
 bin/mysql/mysql5.7.9/data/universitydb

@@ -1,0 +1,13 @@
+.rowSelector {
+			background-color:rgb(205,205,205);
+}
+tbody tr:hover {
+	background-color:rgb(245,245,245);
+}
+tr.rowSelector:hover {
+	background-color:rgb(205,205,205);
+}
+
+.nav-tabs {
+	margin-bottom: 20px;
+}

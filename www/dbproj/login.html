@@ -1,0 +1,49 @@
+<html> 
+<head>
+    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+	<script src="login.js"></script>
+</head>
+<body> 
+<div class="container">
+    <div class="row">
+        <div class="col-md-9"></div>
+        <div class="col-md-3">
+            <button class="btn btn-default" style="margin-top:5px; visibility:hidden">log out</button>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-8">
+        <ul class="nav nav-tabs">
+            <li class="active"><a data-toggle="tab" href="#Home">Home</a></li>
+            
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+    <div class ="row" style="margin-top:20px"></div>
+    <div class="row">
+		<div class="col-md-2"></div>
+		<div class="col-md-8">
+			<div class="tab-content">
+			<div id="Home" class="tab-pane fade in active">
+				<h1 class="text-center"> Medical Practice Management System </h1><br><br>
+				<p class="text-center" style="color:red"></p>
+                <form role="form"autocomplete="off">				
+					<div class="form-group">
+					<input type="text" name = "username" class="form-control" placeholder="Username" required autofocus></div>
+					<div class="form-group">
+					<input type="password" name = "password" class="form-control" placeholder="Password" required></div>
+					<div class="form-group">
+					<input type="submit" class="form-control btn btn-primary" name="submit" value="Login"></div>
+				</form>
+			</div>
+			</div>
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+    
+</div>
+</body>
+<html> 
